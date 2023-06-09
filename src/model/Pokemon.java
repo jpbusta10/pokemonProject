@@ -26,6 +26,10 @@ public class Pokemon {
         this.vida_actual = vida_actual;
     }
 
+    public Pokemon() {
+
+    }
+
     public String getName() {
         return name;
     }
