@@ -14,4 +14,24 @@ public class User extends Character {
         this.pokemonStorage = new HashMap<>();
     }
 
+    public boolean addPokemonToStorage (Pokemon newPokemon)
+    {
+        boolean response = false;
+        if (newPokemon != null)
+        {
+            pokemonStorage.put(newPokemon.getId(), newPokemon);
+            response = true;
+        }
+        else
+        {
+            throw new NullPointerException("Pokemon nulo.");
+        }
+        return response;
+    }
+
+    public void switchPokemon (Pokemon toSquad, Pokemon toStorage) //toSquad es el pokemon que va del almacenamiento al squad y toStorage es el pokemon que va del squad al storage
+    {
+
+    }
+
 }
