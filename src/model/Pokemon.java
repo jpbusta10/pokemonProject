@@ -1,5 +1,7 @@
 package model;
 
+import model.Ability;
+
 import java.util.ArrayList;
 
 public class Pokemon {

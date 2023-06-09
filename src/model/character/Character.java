@@ -1,12 +1,14 @@
-package model.Characters;
+package model.character;
 
 import model.Pokemon;
 
 import java.util.ArrayList;
 
+
 public abstract class Character {
     private String name;
     private ArrayList<Pokemon> squad;
+    private final int squadSize = 6;
 
     public Character(String name, ArrayList<Pokemon> squad) {
         this.name = name;
@@ -17,8 +19,19 @@ public abstract class Character {
         return name;
     }
 
-    public ArrayList<Pokemon> getSquad() {
-        return squad;
+    public boolean addPokemon (Pokemon newPokemon)
+    {
+        boolean response = false;
+        if (newPokemon != null)
+        {
+            if (squad.size() <= squadSize) {
+                squad.add(newPokemon);
+                response = true;
+            }
+            else
+            {
+        }
+        return response;
     }
 
     @Override

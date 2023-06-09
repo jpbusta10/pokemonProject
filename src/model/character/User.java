@@ -1,6 +1,7 @@
-package model.Characters;
+package model.character;
 
 import model.Pokemon;
+import model.character.Character;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,13 +12,6 @@ public class User extends Character {
     public User(String name, ArrayList<Pokemon> squad, HashMap<Integer, Pokemon> pokemonStorage) {
         super(name, squad);
         this.pokemonStorage = new HashMap<>();
-    }
-
-    public boolean addPokemon (Pokemon newPokemon)
-    {
-        boolean response = false;
-
-        return response;
     }
 
 }
