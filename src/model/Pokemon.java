@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Pokemon {
     private String name;
-    private ArrayList<String> tipos;
-    private ArrayList<Habilidad> habilidades;
+    private ArrayList<String> tipos = new ArrayList<String>();
+    private ArrayList<Habilidad> habilidades = new ArrayList<Habilidad>();
     private int id;
     private int id_evolucion;
     private int nivel;
@@ -86,4 +86,22 @@ public class Pokemon {
         this.vida_actual = vida_actual;
     }
 
+    public void agregarArrayListTipo(String tipo){
+        tipos.add(0,tipo);
+    }
+    public void agregarArrayListHabilidades(Habilidad habilidad){
+        habilidades.add(0,habilidad);
+    }
+
+    @Override
+    public String toString() {
+        return "Pokemon{" +
+                "name='" + name + '\'' +
+                ", tipos=" + tipos +
+                ", habilidades=" + habilidades +
+                ", id=" + id +
+                ", nivel=" + nivel +
+                ", id_evolution=" + id_evolucion +
+                '}';
+    }
 }
