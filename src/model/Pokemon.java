@@ -7,10 +7,8 @@ import java.util.ArrayList;
 public class Pokemon {
     private String name;
     private String nickName;
-    private ArrayList<String> types;
-    private ArrayList<Ability> abilities;
-    private ArrayList<String> tipos = new ArrayList<String>();
-    private ArrayList<Ability> habilidades = new ArrayList<Ability>();
+    private ArrayList<String> tipos;
+    private ArrayList<Ability> habilidades;
     private int id;
     private int idPokedex;
     private int idEvolution;
@@ -19,11 +17,10 @@ public class Pokemon {
     private int maxLife; //aumenta con el nivel
     private int currentLife;
 
-    public Pokemon(String name, ArrayList<String> types, ArrayList<Ability> abilities, int id, int idPokedex,
-                   int idEvolution, int level, int experience, int maxLife, int currentLife) {
+    public Pokemon(String name, int id, int idPokedex, int idEvolution, int level, int experience, int maxLife, int currentLife) {
         this.name = name;
-        this.types = types;
-        this.abilities = abilities;
+        this.tipos = new ArrayList<String>();
+        this.habilidades = new ArrayList<Ability>();
         this.id = id;
         this.idEvolution = idEvolution;
         this.level = level;
@@ -59,22 +56,6 @@ public class Pokemon {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
-    }
-
-    public ArrayList<String> getTypes() {
-        return types;
-    }
-
-    public void setTypes(ArrayList<String> types) {
-        this.types = types;
-    }
-
-    public ArrayList<Ability> getAbilities() {
-        return abilities;
-    }
-
-    public void setAbilities(ArrayList<Ability> abilities) {
-        this.abilities = abilities;
     }
 
     public int getIdPokedex() {
@@ -144,10 +125,10 @@ public class Pokemon {
 
 
     public void agregarArrayListTipo(String tipo){
-        tipos.add(0,tipo);
+        tipos.add(tipo);
     }
     public void agregarArrayListHabilidades(Ability habilidad){
-        habilidades.add(0,habilidad);
+        habilidades.add(habilidad);
     }
 
     @Override
