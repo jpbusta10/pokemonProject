@@ -1,29 +1,36 @@
 package model;
 
+import model.Ability;
+
 import java.util.ArrayList;
 
 public class Pokemon {
     private String name;
+    private String nickName;
+    private ArrayList<String> types;
+    private ArrayList<Ability> abilities;
     private ArrayList<String> tipos = new ArrayList<String>();
-    private ArrayList<Habilidad> habilidades = new ArrayList<Habilidad>();
+    private ArrayList<Ability> habilidades = new ArrayList<Ability>();
     private int id;
-    private int id_evolucion;
-    private int nivel;
-    private int experiencia;
-    private int vida_maxima; //aumenta con el nivel
-    private int vida_actual;
+    private int idPokedex;
+    private int idEvolution;
+    private int level;
+    private int experience;
+    private int maxLife; //aumenta con el nivel
+    private int currentLife;
 
-    public Pokemon(String name, ArrayList<String> tipos, ArrayList<Habilidad> habilidades, int id,
-                   int id_evolucion, int nivel, int experiencia, int vida_maxima, int vida_actual) {
+    public Pokemon(String name, ArrayList<String> types, ArrayList<Ability> abilities, int id, int idPokedex,
+                   int idEvolution, int level, int experience, int maxLife, int currentLife) {
         this.name = name;
-        this.tipos = tipos;
-        this.habilidades = habilidades;
+        this.types = types;
+        this.abilities = abilities;
         this.id = id;
-        this.id_evolucion = id_evolucion;
-        this.nivel = nivel;
-        this.experiencia = experiencia;
-        this.vida_maxima = vida_maxima;
-        this.vida_actual = vida_actual;
+        this.idEvolution = idEvolution;
+        this.level = level;
+        this.experience = experience;
+        this.maxLife = maxLife;
+        this.currentLife = currentLife;
+        this.idPokedex = idPokedex;
     }
 
     public Pokemon() {
@@ -46,50 +53,100 @@ public class Pokemon {
         this.id = id;
     }
 
-    public int getId_evolucion() {
-        return id_evolucion;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setId_evolucion(int id_evolucion) {
-        this.id_evolucion = id_evolucion;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
-    public int getNivel() {
-        return nivel;
+    public ArrayList<String> getTypes() {
+        return types;
     }
 
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
+    public void setTypes(ArrayList<String> types) {
+        this.types = types;
     }
 
-    public int getExperiencia() {
-        return experiencia;
+    public ArrayList<Ability> getAbilities() {
+        return abilities;
     }
 
-    public void setExperiencia(int experiencia) {
-        this.experiencia = experiencia;
+    public void setAbilities(ArrayList<Ability> abilities) {
+        this.abilities = abilities;
     }
 
-    public int getVida_maxima() {
-        return vida_maxima;
+    public int getIdPokedex() {
+        return idPokedex;
     }
 
-    public void setVida_maxima(int vida_maxima) {
-        this.vida_maxima = vida_maxima;
+    public void setIdPokedex(int idPokedex) {
+        this.idPokedex = idPokedex;
     }
 
-    public int getVida_actual() {
-        return vida_actual;
+    public int getIdEvolution() {
+        return idEvolution;
     }
 
-    public void setVida_actual(int vida_actual) {
-        this.vida_actual = vida_actual;
+    public void setIdEvolution(int idEvolution) {
+        this.idEvolution = idEvolution;
     }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public int getMaxLife() {
+        return maxLife;
+    }
+
+    public void setMaxLife(int maxLife) {
+        this.maxLife = maxLife;
+    }
+
+    public int getCurrentLife() {
+        return currentLife;
+    }
+
+    public void setCurrentLife(int currentLife) {
+        this.currentLife = currentLife;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean response = false;
+        if (obj != null)
+        {
+            if (obj instanceof Pokemon)
+            {
+                Pokemon aux = (Pokemon) obj;
+                if (getId() == aux.getId())
+                {
+                    response = true;
+                }
+            }
+        }
+        return response;
+    }
+
 
     public void agregarArrayListTipo(String tipo){
         tipos.add(0,tipo);
     }
-    public void agregarArrayListHabilidades(Habilidad habilidad){
+    public void agregarArrayListHabilidades(Ability habilidad){
         habilidades.add(0,habilidad);
     }
 
@@ -100,8 +157,8 @@ public class Pokemon {
                 ", tipos=" + tipos +
                 ", habilidades=" + habilidades +
                 ", id=" + id +
-                ", nivel=" + nivel +
-                ", id_evolution=" + id_evolucion +
+                ", nivel=" + level +
+                ", id_evolution=" + idEvolution +
                 '}';
     }
 }

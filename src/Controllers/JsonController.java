@@ -1,6 +1,6 @@
 package Controllers;
 
-import model.Habilidad;
+import model.Ability;
 import model.Pokemon;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,14 +13,14 @@ public class JsonController {
         JSONObject poki= new JSONObject(respuesta);
         Pokemon nuevo= new Pokemon();
         nuevo.setName(poki.getString("name"));
-        nuevo.setNivel(poki.getInt("level"));
+        nuevo.setLevel(poki.getInt("level"));
         nuevo.setId(poki.getInt("id"));
         if(!poki.isNull("id_evolution")) {
-            nuevo.setId_evolucion(poki.getInt("id_evolution"));
+            nuevo.setIdEvolution(poki.getInt("id_evolution"));
         }
         JSONArray skills= poki.getJSONArray("abilities");
         for (int i=0;i<skills.length();i++){
-            Habilidad habilidad = new Habilidad(skills.getString(i),10);
+            Ability habilidad = new Ability(skills.getString(i),10);
             nuevo.agregarArrayListHabilidades(habilidad);
         }
         nuevo.agregarArrayListTipo(poki.getString("type1"));
