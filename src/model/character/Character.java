@@ -6,7 +6,7 @@ import model.exceptions.FullSquadException;
 import java.util.ArrayList;
 
 
-public abstract class Character {
+public class Character {
     private String name;
     private ArrayList<Pokemon> squad;
     private final int squadSize = 6;
@@ -24,8 +24,8 @@ public abstract class Character {
         boolean response = false;
         if (newPokemon != null) {
             if (squad.size() < squadSize) {
-                squad.add(newPokemon);
-                response = true;
+
+                response = squad.add(newPokemon);
             } else {
                 throw new FullSquadException();
             }
@@ -38,7 +38,12 @@ public abstract class Character {
 
     public boolean removePokemon(Pokemon remove)
     {
-
+        boolean response = false;
+        if (squad.remove(remove))
+        {
+            response = true;
+        }
+        return response;
     }
 
     @Override

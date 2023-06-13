@@ -118,4 +118,23 @@ public class Pokemon {
     public void setCurrentLife(int currentLife) {
         this.currentLife = currentLife;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean response = false;
+        if (obj != null)
+        {
+            if (obj instanceof Pokemon)
+            {
+                Pokemon aux = (Pokemon) obj;
+                if (getId() == aux.getId())
+                {
+                    response = true;
+                }
+            }
+        }
+        return response;
+    }
+
+
 }

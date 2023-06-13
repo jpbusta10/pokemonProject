@@ -19,8 +19,13 @@ public class User extends Character {
         boolean response = false;
         if (newPokemon != null)
         {
-            pokemonStorage.put(newPokemon.getId(), newPokemon);
-            response = true;
+            if (pokemonStorage.put(newPokemon.getId(), newPokemon) != null)
+            {
+                response = true;
+            }
+            else {
+
+            }
         }
         else
         {
@@ -29,9 +34,15 @@ public class User extends Character {
         return response;
     }
 
+    public boolean removePokemonFromStorage(Pokemon remove)
+    {
+        boolean response = false;
+        return response;
+    }
+
     public void switchPokemon (Pokemon toSquad, Pokemon toStorage) //toSquad es el pokemon que va del almacenamiento al squad y toStorage es el pokemon que va del squad al storage
     {
-
+        //removePokemon();
     }
 
 }
