@@ -1,7 +1,6 @@
 package Controllers;
 
 import model.Ability;
-import model.Ability;
 import model.Pokemon;
 import org.json.JSONArray;
 import org.json.JSONObject;
