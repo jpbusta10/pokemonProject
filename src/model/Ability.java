@@ -32,4 +32,6 @@ public class Ability {
                 ", damage=" + damage +
                 '}';
     }
+
+
 }

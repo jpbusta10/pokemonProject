@@ -9,6 +9,8 @@ public class Pokemon {
     private String nickName;
     private ArrayList<String> types;
     private ArrayList<Ability> abilities;
+    private ArrayList<String> tipos = new ArrayList<String>();
+    private ArrayList<Ability> habilidades = new ArrayList<Ability>();
     private int id;
     private int idPokedex;
     private int idEvolution;
@@ -141,4 +143,22 @@ public class Pokemon {
     }
 
 
+    public void agregarArrayListTipo(String tipo){
+        tipos.add(0,tipo);
+    }
+    public void agregarArrayListHabilidades(Ability habilidad){
+        habilidades.add(0,habilidad);
+    }
+
+    @Override
+    public String toString() {
+        return "Pokemon{" +
+                "name='" + name + '\'' +
+                ", tipos=" + tipos +
+                ", habilidades=" + habilidades +
+                ", id=" + id +
+                ", nivel=" + level +
+                ", id_evolution=" + idEvolution +
+                '}';
+    }
 }
