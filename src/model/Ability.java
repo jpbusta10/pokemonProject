@@ -1,10 +1,10 @@
 package model;
 
-public class Habilidad {
+public class Ability {
     private String name;
     private int damage;
 
-    public Habilidad(String name, int damage) {
+    public Ability(String name, int damage) {
         this.name = name;
         this.damage = damage;
     }
