@@ -9,13 +9,12 @@ import java.util.ArrayList;
 public class Character {
     private String name;
     private ArrayList<Pokemon> squad;
-    private final int squadSize = 6;
+    private final int squadSize = 3;
 
-    public Character(String name, ArrayList<Pokemon> squad) {
+    public Character(String name) {
         this.name = name;
-        this.squad = squad;
+        squad = new  ArrayList<Pokemon>(squadSize);
     }
-
     public String getName() {
         return name;
     }
