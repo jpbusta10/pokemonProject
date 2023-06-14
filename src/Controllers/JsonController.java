@@ -21,7 +21,7 @@ public class JsonController {
         JSONArray skills= poki.getJSONArray("abilities");
         for (int i=0;i<skills.length();i++){
             Ability habilidad = new Ability(skills.getString(i),10);
-            nuevo.agregarArrayListHabilidades(habilidad);
+            nuevo.addAbility(habilidad);
         }
         nuevo.agregarArrayListTipo(poki.getString("type1"));
         if(!poki.isNull("type2")){
@@ -41,8 +41,8 @@ public class JsonController {
         }
         JSONArray skills= poki.getJSONArray("abilities");
         for (int i=0;i<skills.length();i++){
-            Ability habilidad = new Ability(skills.getString(i),10);
-            nuevo.agregarArrayListHabilidades(habilidad);
+            Ability newAbility = new Ability(skills.getString(i),10);
+            nuevo.addAbility(newAbility);
         }
         nuevo.agregarArrayListTipo(poki.getString("type1"));
         if(!poki.isNull("type2")){

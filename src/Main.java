@@ -9,11 +9,13 @@ import static Controllers.JsonController.RandomPokemon;
 
 public class Main {
     static Scanner keyboard;
+
     public static void main(String[] args) {
         initialMenu();
 
     }
-    static boolean initialMenu(){
+
+    static boolean initialMenu() {
         keyboard = new Scanner(System.in);
         int option = 0;
         boolean rta = true;
@@ -21,7 +23,7 @@ public class Main {
         System.out.println("2.cargar juego");
         System.out.println("3.salir");
         option = keyboard.nextInt();
-        switch (option){
+        switch (option) {
             case 1:
                 newGame();
                 break;
@@ -34,7 +36,8 @@ public class Main {
         }
         return rta;
     }
-    static boolean newGame(){
+
+    static void newGame() {
         boolean rta = true;
         keyboard = new Scanner(System.in);
         String name = new String("");
@@ -48,7 +51,7 @@ public class Main {
         System.out.println("3. bulbasaur");
         System.out.println("4. squirtle");
         option = keyboard.nextInt();
-        switch (option){
+        switch (option) {
             case 1:
                 FrontController.addPokemonToUserByid(25);
                 break;
@@ -62,15 +65,18 @@ public class Main {
                 FrontController.addPokemonToUserByid(7);
                 break;
         }
-        rta = menuJuego();
+        System.out.println("felicidades ya tiene su Pokemon");
+        menuJuego();
 
-        return rta;
 
     }
-    static boolean menuJuego(){
+
+    static void menuJuego() {
         keyboard = new Scanner(System.in);
-        boolean rta =true;
-        while(rta == false) {
+        System.out.println("presione caulquier tecla para continuar");
+        keyboard.nextLine();
+        boolean seguir = true;
+        while (seguir == true) {
             System.out.println("que desea hacer ahora");
             System.out.println("1.cazar pokemon");
             System.out.println("2. campeonato");
@@ -85,14 +91,14 @@ public class Main {
                     //menu campeonato
                     break;
                 case 3:
-                    rta = false;
+                    seguir = false;
+                    initialMenu();
                     break;
 
             }
         }
-        return rta;
-    }
 
+    }
 
 
 }
