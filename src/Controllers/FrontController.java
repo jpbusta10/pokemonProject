@@ -6,7 +6,7 @@ public class FrontController {
     private static Game myGame;
 
     public static void NewGame(String name){
-        myGame = new Game();
+        myGame = new Game(name);
     }
 
     public static boolean addPokemonToUserByid(int id){
