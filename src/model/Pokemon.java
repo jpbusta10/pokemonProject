@@ -31,7 +31,8 @@ public class Pokemon {
     }
 
     public Pokemon() {
-
+        this.habilidades = new ArrayList<>();
+        this.tipos = new ArrayList<>();
     }
 
     public String getName() {
@@ -127,7 +128,7 @@ public class Pokemon {
     public void agregarArrayListTipo(String tipo){
         tipos.add(tipo);
     }
-    public void agregarArrayListHabilidades(Ability habilidad){
+    public void addAbility(Ability habilidad){
         habilidades.add(habilidad);
     }
 
