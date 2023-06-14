@@ -25,7 +25,7 @@ public class Main {
         option = keyboard.nextInt();
         switch (option) {
             case 1:
-                newGame();
+                newGameMenu();
                 break;
             case 2:
                 //carga juego
@@ -37,7 +37,7 @@ public class Main {
         return rta;
     }
 
-    static void newGame() {
+    static void newGameMenu() {
         boolean rta = true;
         keyboard = new Scanner(System.in);
         String name = new String("");
