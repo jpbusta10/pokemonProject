@@ -1,8 +1,11 @@
 import Controllers.ApiController;
 import Controllers.FrontController;
 import model.Pokemon;
+import model.character.User;
+import model.exceptions.FullSquadException;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static Controllers.JsonController.RandomPokemon;

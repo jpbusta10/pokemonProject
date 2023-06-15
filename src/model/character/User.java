@@ -4,8 +4,11 @@ import model.Pokemon;
 import model.character.Character;
 import model.exceptions.FullSquadException;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class User extends Character {
     private HashMap<Integer, Pokemon> pokemonStorage; //Se almacena por el id unico.
@@ -58,6 +61,15 @@ public class User extends Character {
                 System.out.println(ex.getMessage());
             }
 
+        }
+    }
+
+    public void storageView ()
+    {
+        Iterator it = pokemonStorage.entrySet().iterator();
+        while (it.hasNext())
+        {
+            System.out.println(it.next());
         }
     }
 
