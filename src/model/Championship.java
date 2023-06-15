@@ -32,8 +32,22 @@ public class Championship {
         nuevo = JsonController.PokemonByID(54);
         misty.addPokemon(nuevo);
         this.gyms.get(1).addTrainer(misty);
-
+        // gym ciudad carmin
+        gyms.add(new Gym("ciudad carmin"));
+        Trainer surge = new Trainer("Lt.Surge");
+        surge.addPokemon(JsonController.PokemonByID(25));
+        surge.addPokemon(JsonController.PokemonByID(26));
+        surge.addPokemon(JsonController.PokemonByID(100));
+        this.gyms.get(2).addTrainer(surge);
     }
+
+    public ArrayList getGyms(){
+        ArrayList<Gym> copyGyms = new ArrayList<>(gyms.size());
+        copyGyms.addAll(gyms);
+        return copyGyms;
+    }
+
+
 
 
 

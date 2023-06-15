@@ -2,9 +2,12 @@ package model;
 
 import model.biomes.Biome;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import Controllers.JsonController;
+import model.biomes.Gym;
+import model.character.Character;
 import model.character.User;
 
 public class Game {
@@ -15,6 +18,7 @@ public class Game {
     Biome volcano = Biome.VOLCANO;
     private User myUser;
     private int idPokemon; ///actual id pokemon
+    private Championship myChampionship;
 
     public Game() {
     }
@@ -41,13 +45,22 @@ public class Game {
     }
 
     public boolean addPokemonUser(Pokemon newPokemon) {
-        boolean rta = false;
-        try {
-            rta = this.myUser.addPokemon(newPokemon);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        boolean rta = this.myUser.addPokemon(newPokemon);
         return rta;
+    }
+
+    public void newChampionship() {
+        this.myChampionship.newChampionship();
+    }
+
+    public ArrayList getNotFinishedGyms() {
+        ArrayList<Gym> gyms = myChampionship.getGyms();
+        ArrayList<Gym> notPassed = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < gyms.size() && !gyms.get(i).isPassed(); i++) {
+            notPassed.add(gyms.get(i));
+        }
+        return notPassed;
     }
 
 }

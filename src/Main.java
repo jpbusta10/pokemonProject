@@ -21,7 +21,7 @@ public class Main {
         boolean rta = true;
         System.out.println("1. nuevo juego");
         System.out.println("2.cargar juego");
-        System.out.println("3.salir");
+        System.out.println("9.salir");
         option = keyboard.nextInt();
         switch (option) {
             case 1:
@@ -30,7 +30,7 @@ public class Main {
             case 2:
                 //carga juego
                 break;
-            case 3:
+            case 9:
                 rta = false;
                 break;
         }
@@ -80,7 +80,7 @@ public class Main {
             System.out.println("que desea hacer ahora");
             System.out.println("1.cazar pokemon");
             System.out.println("2. campeonato");
-            System.out.println("3. salir");
+            System.out.println("9. salir");
             int option = 0;
             option = keyboard.nextInt();
             switch (option) {
@@ -90,12 +90,37 @@ public class Main {
                 case 2:
                     //menu campeonato
                     break;
-                case 3:
+                case 9:
                     seguir = false;
                     initialMenu();
                     break;
 
             }
+        }
+
+    }
+    static  void menuCampeonato(){
+        keyboard = new Scanner(System.in);
+        System.out.println("presione caulquier tecla para continuar");
+        keyboard.nextLine();
+        int option = 0;
+        boolean seguir = true;
+        while(seguir == true){
+            System.out.println("1. ver tu progreso");
+            System.out.println("2. continuar el campeonato");
+            System.out.println("9. salir");
+            switch(option){
+                case 1:
+                    //ver progreso
+                    break;
+                case 2:
+                    //continuar
+                    break;
+                case 9:
+                    seguir = false;
+            }
+
+
         }
 
     }

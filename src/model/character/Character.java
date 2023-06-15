@@ -18,10 +18,10 @@ public class Character {
         return name;
     }
 
-    public void addPokemon(Pokemon newPokemon) {
+    public boolean addPokemon(Pokemon newPokemon) {
 
-        squad.add(newPokemon);
-
+        boolean rta = squad.add(newPokemon);
+        return rta;
     }
 
     public boolean removePokemon(Pokemon remove)
