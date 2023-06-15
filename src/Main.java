@@ -112,8 +112,10 @@ public class Main {
            option = keyboard.nextInt();
             switch(option){
                 case 1:
-                    System.out.println(FrontController.getNotfinishedGyms());
+                    System.out.println("Not finished gyms: ");
+                    System.out.println(FrontController.getFinishedGymsNames());
                     System.out.println("presione cualquier tecla para continuar");
+                    keyboard.nextLine();
                     keyboard.nextLine();
                     break;
                 case 2:

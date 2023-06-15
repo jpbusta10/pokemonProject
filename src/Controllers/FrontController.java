@@ -2,6 +2,8 @@ package Controllers;
 import model.Game;
 import model.Pokemon;
 import model.biomes.Gym;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,17 @@ public class FrontController {
             sb.append(data);
         }
         return sb.toString();
+    }
+    public static String getFinishedGymsNames(){
+
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Gym> notFinished = myGame.getNotFinishedGyms();
+        for (Gym data : notFinished) {
+            sb.append(data.getName());
+            sb.append("\n");
+        }
+        return sb.toString();
+
     }
 
 

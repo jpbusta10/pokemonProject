@@ -57,7 +57,6 @@ public class Game {
     public ArrayList getNotFinishedGyms() {
         ArrayList<Gym> gyms = myChampionship.getGyms();
         ArrayList<Gym> notPassed = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < gyms.size() && !gyms.get(i).isPassed(); i++) {
             notPassed.add(gyms.get(i));
         }
