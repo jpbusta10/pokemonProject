@@ -11,6 +11,7 @@ public class Gym {
     private boolean passed;
 
     public Gym(String name){
+        this.name = name;
         this.trainers = new ArrayList<>();
         this.passed = false;
     }

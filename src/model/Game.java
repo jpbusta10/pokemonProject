@@ -25,6 +25,7 @@ public class Game {
 
     public Game(String name) {
         this.myUser = new User(name);
+        myChampionship = new Championship();
     }
 
     /**

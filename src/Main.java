@@ -88,7 +88,7 @@ public class Main {
                     // menu cazar
                     break;
                 case 2:
-                    //menu campeonato
+                    menuCampeonato();
                     break;
                 case 9:
                     seguir = false;
@@ -109,9 +109,12 @@ public class Main {
             System.out.println("1. ver tu progreso");
             System.out.println("2. continuar el campeonato");
             System.out.println("9. salir");
+           option = keyboard.nextInt();
             switch(option){
                 case 1:
-                    //ver progreso
+                    System.out.println(FrontController.getNotfinishedGyms());
+                    System.out.println("presione cualquier tecla para continuar");
+                    keyboard.nextLine();
                     break;
                 case 2:
                     //continuar
