@@ -45,6 +45,11 @@ public class Character {
         return response;
     }
 
+    public void swapPokemon (Pokemon x)
+    {
+
+    }
+
     @Override
     public String toString() {
         return "Character{" +

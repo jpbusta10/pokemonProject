@@ -2,6 +2,7 @@ package model.character;
 
 import model.Pokemon;
 import model.character.Character;
+import model.exceptions.FullSquadException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,8 +37,7 @@ public class User extends Character {
     {
         boolean response = false;
         if(remove!=null){
-            this.pokemonStorage.remove(remove.getId(),remove);
-            response=true;
+            response = this.pokemonStorage.remove(remove.getId(),remove);
         }else {
             throw new NullPointerException("el pokemon no existe");
         }
@@ -46,6 +46,19 @@ public class User extends Character {
 
     public void switchPokemon (Pokemon toSquad, Pokemon toStorage) //toSquad es el pokemon que va del almacenamiento al squad y toStorage es el pokemon que va del squad al storage
     {
+        if (super.removePokemon(toStorage))
+        {
+            addPokemonToStorage(toStorage);
+            removePokemonFromStorage(toSquad);
+            try{
+                super.addPokemon(toSquad);
+            }
+            catch (FullSquadException ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+
+        }
     }
 
 
