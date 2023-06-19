@@ -40,6 +40,11 @@ public class FrontController {
         return sb.toString();
 
     }
+    public static String getTodoGymName(){ ///returns null if
+        Gym gym = myGame.getToDoGym();
+        return gym.getName();
+    }
+
 
 
 

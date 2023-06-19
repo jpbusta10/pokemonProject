@@ -62,5 +62,15 @@ public class Game {
         }
         return notPassed;
     }
+    public Gym getToDoGym(){
+        ArrayList<Gym> gyms = myChampionship.getGyms();
+        Gym rta = null;
+        for(Gym gym: gyms){
+            if(gym.isPassed() == false){
+                return gym;
+            }
+        }
+        return rta;
+    }
 
 }

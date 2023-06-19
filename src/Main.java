@@ -101,7 +101,7 @@ public class Main {
     }
     static  void menuCampeonato(){
         keyboard = new Scanner(System.in);
-        System.out.println("presione caulquier tecla para continuar");
+        System.out.println("presione cualquier tecla para continuar");
         keyboard.nextLine();
         int option = 0;
         boolean seguir = true;
@@ -116,10 +116,9 @@ public class Main {
                     System.out.println(FrontController.getFinishedGymsNames());
                     System.out.println("presione cualquier tecla para continuar");
                     keyboard.nextLine();
-                    keyboard.nextLine();
                     break;
                 case 2:
-                    //continuar
+                    gimnacio();
                     break;
                 case 9:
                     seguir = false;
@@ -129,6 +128,16 @@ public class Main {
         }
 
     }
+    static void gimnacio(){
+        keyboard = new Scanner(System.in);
+        int option = 0;
+        boolean seguir = true;
+        while(seguir == true){
+            System.out.println("estas en " + FrontController.getTodoGymName());
+
+        }
+    }
+
 
 
 }
