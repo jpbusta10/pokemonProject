@@ -73,4 +73,14 @@ public class Game {
         return rta;
     }
 
+    public void getSquad ()
+    {
+        myUser.squadView();
+    }
+
+    public String getPokemonData (int indexOfPokemon)
+    {
+        return myUser.pokemonData(indexOfPokemon);
+    }
+
 }

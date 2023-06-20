@@ -45,9 +45,15 @@ public class FrontController {
         return gym.getName();
     }
 
+    public static void getSquad()
+    {
+        myGame.getSquad();
+    }
 
-
-
+    public static String getPokemonData(int indexOfPokemon)
+    {
+        return myGame.getPokemonData(indexOfPokemon);
+    }
 
 
 

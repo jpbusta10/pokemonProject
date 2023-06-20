@@ -2,7 +2,6 @@ import Controllers.ApiController;
 import Controllers.FrontController;
 import model.Pokemon;
 import model.character.User;
-import model.exceptions.FullSquadException;
 
 
 import java.util.ArrayList;
@@ -81,8 +80,9 @@ public class Main {
         boolean seguir = true;
         while (seguir == true) {
             System.out.println("que desea hacer ahora");
-            System.out.println("1.cazar pokemon");
+            System.out.println("1. cazar pokemon");
             System.out.println("2. campeonato");
+            System.out.println("3. pokemon");
             System.out.println("9. salir");
             int option = 0;
             option = keyboard.nextInt();
@@ -141,6 +141,59 @@ public class Main {
         }
     }
 
+    static void menuPokemon (){
+        keyboard = new Scanner(System.in);
+        System.out.println("presione caulquier tecla para continuar");
+        keyboard.nextLine();
+        int option = 0;
+        while(option != 9) {
+            FrontController.getSquad();
+            System.out.println("9. salir");
+            option = keyboard.nextInt();
+            if(option > 0 && option < 7)
+            {
+                //menuAcciones
+            }
+            else if (option != 9)
+            {
+                System.out.println("La opcion ingresada no existe.");
+            }
+        }
+    }
 
+    static void menuAcciones (int indexOfPokemon)
+    {
+        keyboard = new Scanner(System.in);
+        System.out.println("presione caulquier tecla para continuar");
+        keyboard.nextLine();
+        int option = 0;
+        while (option != 9)
+        {
+            System.out.println("que desea hacer");
+            System.out.println("1. Ver datos del pokemon");
+            System.out.println("2. Cambiar posicion en el equipo");
+            System.out.println("3. Cambiar con un pokemon del almacenamiento");
+            System.out.println("9. Salir");
+            option = keyboard.nextInt();
+            switch (option)
+            {
+                case 1:
+                    System.out.println(FrontController.getPokemonData(indexOfPokemon));
+                    break;
+                case 2:
+                    System.out.println("Ingrese la posicion ");
+                    FrontController.getSquad();
+                    //Esto hacerlo en otro metodo y verificar que la posicion no sea la misma del pokemon que quiere cambiar y que este dentro del rango.
+                    break;
+                case 3:
 
+                    break;
+                case 9:
+                    System.out.println("Saliendo");
+                    break;
+                default:
+                    System.out.println("Opcion fuera de rango");
+            }
+        }
+    }
 }

@@ -47,8 +47,13 @@ public class Character {
     {
         for (Pokemon aux :
                 squad) {
-            System.out.println(squad.indexOf(aux) + ") " + aux.toString());
+            System.out.println(squad.indexOf(aux)+1 + ") " + aux.toString());
         }
+    }
+
+    public String pokemonData (int indexOfPokemon)
+    {
+        return squad.get(indexOfPokemon).toString();
     }
 
     @Override

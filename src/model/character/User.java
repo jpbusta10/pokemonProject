@@ -2,7 +2,6 @@ package model.character;
 
 import model.Pokemon;
 import model.character.Character;
-import model.exceptions.FullSquadException;
 
 import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
@@ -53,14 +52,7 @@ public class User extends Character {
         {
             addPokemonToStorage(toStorage);
             removePokemonFromStorage(toSquad);
-            try{
-                super.addPokemon(toSquad);
-            }
-            catch (FullSquadException ex)
-            {
-                System.out.println(ex.getMessage());
-            }
-
+            super.addPokemon(toSquad);
         }
     }
 
@@ -73,5 +65,10 @@ public class User extends Character {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "pokemonStorage=" + pokemonStorage +
+                '}';
+    }
 }
