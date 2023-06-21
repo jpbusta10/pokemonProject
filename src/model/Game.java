@@ -1,11 +1,9 @@
 package model;
-
 import model.biomes.Biome;
-
+import java.util.ArrayList;
 import java.util.Random;
-
 import Controllers.JsonController;
-import model.character.Character;
+import model.biomes.Gym;
 import model.character.User;
 
 public class Game {
@@ -16,13 +14,14 @@ public class Game {
     Biome volcano = Biome.VOLCANO;
     private User myUser;
     private int idPokemon; ///actual id pokemon
-    
 
+    private Championship myChampionship;
     public Game() {
     }
 
     public Game(String name) {
         this.myUser = new User(name);
+        myChampionship = new Championship();
     }
 
     public User getMyUser() {
@@ -47,11 +46,29 @@ public class Game {
     }
 
     public boolean addPokemonUser(Pokemon newPokemon) {
-        boolean rta = false;
-        try {
-            rta = this.myUser.addPokemon(newPokemon);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        boolean rta = this.myUser.addPokemon(newPokemon);
+        return rta;
+    }
+
+    public void newChampionship() {
+        this.myChampionship.newChampionship();
+    }
+
+    public ArrayList getNotFinishedGyms() {
+        ArrayList<Gym> gyms = myChampionship.getGyms();
+        ArrayList<Gym> notPassed = new ArrayList<>();
+        for (int i = 0; i < gyms.size() && !gyms.get(i).isPassed(); i++) {
+            notPassed.add(gyms.get(i));
+        }
+        return notPassed;
+    }
+    public Gym getToDoGym(){
+        ArrayList<Gym> gyms = myChampionship.getGyms();
+        Gym rta = null;
+        for(Gym gym: gyms){
+            if(gym.isPassed() == false){
+                return gym;
+            }
         }
         return rta;
     }
@@ -63,11 +80,7 @@ public class Game {
         return currentLife;
     }
 
-    public boolean Peleaindividual(){
 
-
-
-    }
 
 
 

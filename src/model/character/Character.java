@@ -1,7 +1,6 @@
 package model.character;
 
 import model.Pokemon;
-import model.exceptions.FullSquadException;
 
 import java.util.ArrayList;
 
@@ -21,6 +20,7 @@ public class Character {
     }
 
     public boolean addPokemon(Pokemon newPokemon) {
+
         boolean response = false;
         if (newPokemon != null) {
             if (squad.size() < squadSize) {
@@ -30,7 +30,9 @@ public class Character {
                 throw new NullPointerException("Pokemon nulo.");
             }
         }
-        return response;
+        boolean rta = squad.add(newPokemon);
+        return rta;
+
     }
 
 

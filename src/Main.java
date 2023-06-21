@@ -38,7 +38,7 @@ public class Main {
         boolean rta = true;
         System.out.println("1. nuevo juego");
         System.out.println("2.cargar juego");
-        System.out.println("3.salir");
+        System.out.println("9.salir");
         option = keyboard.nextInt();
         switch (option) {
             case 1:
@@ -47,7 +47,7 @@ public class Main {
             case 2:
                 //carga juego
                 break;
-            case 3:
+            case 9:
                 rta = false;
                 break;
         }
@@ -97,7 +97,7 @@ public class Main {
             System.out.println("que desea hacer ahora");
             System.out.println("1.cazar pokemon");
             System.out.println("2. campeonato");
-            System.out.println("3. salir");
+            System.out.println("9. salir");
             int option = 0;
             option = keyboard.nextInt();
             switch (option) {
@@ -105,9 +105,9 @@ public class Main {
                     // menu cazar
                     break;
                 case 2:
-                    //menu campeonato
+                    menuCampeonato();
                     break;
-                case 3:
+                case 9:
                     seguir = false;
                     initialMenu();
                     break;
@@ -116,25 +116,63 @@ public class Main {
         }
 
     }
-    static void menuPelea(){
+    static void menuPelea() {
         keyboard = new Scanner(System.in);
-        int opcion=0;
+        int opcion = 0;
         System.out.println("presione cualquier tecla para continuar");
         keyboard.nextLine();
-        for (int i=0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
             System.out.println("\n");
         }
         System.out.println("|||||||||||||||||||COMIENZA EL COMBATE|||||||||||||||||||\n");
         System.out.println("\n");
-        System.out.println(FrontController.getPokemonOponente());
         System.out.println("Empiezas tu\n");
         System.out.println("Que Pokemon deseas usar?\n");
         System.out.println(FrontController.listadepokemonesuser());
-        opcion=keyboard.nextInt();
+        opcion = keyboard.nextInt();
         System.out.println(FrontController.safeUserPokemonReturn(opcion));
         System.out.println("Que habilidad deseas utilizar: \n");
-        opcion= keyboard.nextInt();
+        opcion = keyboard.nextInt();
+    }
+
+    static  void menuCampeonato(){
+        keyboard = new Scanner(System.in);
+        System.out.println("presione cualquier tecla para continuar");
+        keyboard.nextLine();
+        int option = 0;
+        boolean seguir = true;
+        while(seguir == true){
+            System.out.println("1. ver tu progreso");
+            System.out.println("2. continuar el campeonato");
+            System.out.println("9. salir");
+           option = keyboard.nextInt();
+            switch(option){
+                case 1:
+                    System.out.println("Not finished gyms: ");
+                    System.out.println(FrontController.getFinishedGymsNames());
+                    System.out.println("presione cualquier tecla para continuar");
+                    keyboard.nextLine();
+                    break;
+                case 2:
+                    gimnacio();
+                    break;
+                case 9:
+                    seguir = false;
+            }
+
+
+        }
+
+    }
+    static void gimnacio(){
+        keyboard = new Scanner(System.in);
+        int option = 0;
+        boolean seguir = true;
+        while(seguir == true){
+            System.out.println("estas en " + FrontController.getTodoGymName());
+        }
+    }
+
 
     }
 
-}
