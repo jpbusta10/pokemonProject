@@ -5,6 +5,7 @@ import model.biomes.Biome;
 import java.util.Random;
 
 import Controllers.JsonController;
+import model.character.Character;
 import model.character.User;
 
 public class Game {
@@ -15,12 +16,17 @@ public class Game {
     Biome volcano = Biome.VOLCANO;
     private User myUser;
     private int idPokemon; ///actual id pokemon
+    
 
     public Game() {
     }
 
     public Game(String name) {
         this.myUser = new User(name);
+    }
+
+    public User getMyUser() {
+        return myUser;
     }
 
     /**
@@ -49,5 +55,25 @@ public class Game {
         }
         return rta;
     }
+
+
+    public static int PeleaPokemon(int dmg, Pokemon atacado) {
+        atacado.setCurrentLife(atacado.getCurrentLife() - dmg);
+        int currentLife = atacado.getCurrentLife();
+        return currentLife;
+    }
+
+    public boolean Peleaindividual(){
+
+
+
+    }
+
+
+
+
+
+
+
 
 }

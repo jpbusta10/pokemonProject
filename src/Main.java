@@ -1,8 +1,13 @@
 import Controllers.ApiController;
 import Controllers.FrontController;
+import Controllers.JsonController;
+import model.Ability;
+import model.Game;
 import model.Pokemon;
+import model.character.Character;
 
 
+import java.util.Formatter;
 import java.util.Scanner;
 
 import static Controllers.JsonController.RandomPokemon;
@@ -11,8 +16,20 @@ public class Main {
     static Scanner keyboard;
 
     public static void main(String[] args) {
-        initialMenu();
 
+        Pokemon pikachu= JsonController.PokemonByID(25);
+        System.out.println(pikachu.toString());
+        System.out.println("///////////////");
+        for(int i=0;i<10;i++){
+            pikachu=Pokemon.levelup(pikachu);
+        }
+        System.out.println(pikachu.toString());
+
+        /*Pokemon pikachu= JsonController.PokemonByID(25);
+        System.out.println(pikachu.toString());
+        System.out.println("///////////////");
+        pikachu=Pokemon.Evolucion(pikachu);
+        System.out.println(pikachu.toString());*/
     }
 
     static boolean initialMenu() {
@@ -99,6 +116,26 @@ public class Main {
         }
 
     }
+    static boolean menuPelea(){
+        keyboard = new Scanner(System.in);
+        int opcion=0;
+        System.out.println("presione cualquier tecla para continuar");
+        keyboard.nextLine();
+        for (int i=0;i<10;i++){
+            System.out.println("\n");
+        }
+        System.out.println("|||||||||||||||||||COMIENZA EL COMBATE|||||||||||||||||||\n");
+        System.out.println("\n");
+        System.out.println(FrontController.getPokemonOponente());
+        System.out.println("Empiezas tu\n");
+        System.out.println("Que Pokemon deseas usar?\n");
+        System.out.println(FrontController.listadepokemonesuser());
+        opcion=keyboard.nextInt();
+        System.out.println(FrontController.safeUserPokemonReturn(opcion));
+        System.out.println("Que habilidad deseas utilizar: \n");
+        opcion= keyboard.nextInt();
 
+
+    }
 
 }

@@ -13,38 +13,62 @@ public class Character {
 
     public Character(String name) {
         this.name = name;
-        squad = new  ArrayList<Pokemon>(squadSize);
+        squad = new ArrayList<Pokemon>(squadSize);
     }
+
     public String getName() {
         return name;
     }
 
-    public boolean addPokemon(Pokemon newPokemon) throws FullSquadException, NullPointerException {
+    public boolean addPokemon(Pokemon newPokemon) {
         boolean response = false;
         if (newPokemon != null) {
             if (squad.size() < squadSize) {
 
                 response = squad.add(newPokemon);
             } else {
-                throw new FullSquadException();
+                throw new NullPointerException("Pokemon nulo.");
             }
-        } else
-        {
-            throw new NullPointerException("Pokemon nulo.");
         }
         return response;
     }
 
-    public boolean removePokemon(Pokemon remove)
-    {
-        boolean response = false;
-        if (squad.remove(remove))
-        {
-            response = true;
+
+        public boolean removePokemon (Pokemon remove){
+            boolean response = false;
+            if (squad.remove(remove)) {
+                response = true;
+            }
+            return response;
         }
-        return response;
+
+    public String getSquad() {
+        return squad.toString();
     }
 
+    public Pokemon getPokemonFromSquad(int opcion){
+            Pokemon variable = new Pokemon();
+            switch (opcion) {
+                case 1:
+                    variable = squad.get(0);
+                    break;
+                case 2:
+                    variable = squad.get(1);
+                    break;
+                case 3:
+                    variable = squad.get(2);
+                    break;
+            }
+            return variable;
+        }
+
+    public boolean vacio(){
+        boolean respuesta=false;
+        if(squad.isEmpty()){
+            respuesta=true;
+        }
+        return respuesta;
+    }
     @Override
     public String toString() {
         return "Character{" +

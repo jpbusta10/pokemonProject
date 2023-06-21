@@ -8,6 +8,7 @@ public class Ability {
         this.name = name;
         this.damage = damage;
     }
+    public Ability(){};
 
     public String getName() {
         return name;
@@ -27,10 +28,7 @@ public class Ability {
 
     @Override
     public String toString() {
-        return "Habilidad{" +
-                "name='" + name + '\'' +
-                ", damage=" + damage +
-                '}';
+        return "Habilidad:"+name;
     }
 
 
