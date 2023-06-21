@@ -78,9 +78,13 @@ public class Game {
         myUser.squadView();
     }
 
+    public int getSquadSize ()
+    {
+        return myUser.getSquadSize();
+    }
+
     public String getPokemonData (int indexOfPokemon)
     {
         return myUser.pokemonData(indexOfPokemon);
     }
-
 }

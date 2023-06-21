@@ -55,6 +55,9 @@ public class FrontController {
         return myGame.getPokemonData(indexOfPokemon);
     }
 
-
+    public static int getSquadSize ()
+    {
+        return myGame.getSquadSize();
+    }
 
 }

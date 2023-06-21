@@ -150,9 +150,9 @@ public class Main {
             FrontController.getSquad();
             System.out.println("9. salir");
             option = keyboard.nextInt();
-            if(option > 0 && option < 7)
+            if(option > 0 && option < FrontController.getSquadSize())
             {
-                //menuAcciones
+                //menuAcciones le paso option
             }
             else if (option != 9)
             {
@@ -181,8 +181,7 @@ public class Main {
                     System.out.println(FrontController.getPokemonData(indexOfPokemon));
                     break;
                 case 2:
-                    System.out.println("Ingrese la posicion ");
-                    FrontController.getSquad();
+
                     //Esto hacerlo en otro metodo y verificar que la posicion no sea la misma del pokemon que quiere cambiar y que este dentro del rango.
                     break;
                 case 3:
@@ -195,5 +194,20 @@ public class Main {
                     System.out.println("Opcion fuera de rango");
             }
         }
+    }
+
+    static void menuSwap (int indexOfPokemon)
+    {
+        int swap = 0;
+        keyboard = new Scanner(System.in);
+        System.out.println("presione caulquier tecla para continuar");
+        keyboard.nextLine();
+        while ((swap < 0 || swap > FrontController.getSquadSize()) && swap == indexOfPokemon)
+        FrontController.getSquad();
+        System.out.println("Ingrese la posicion en la que lo quiere ubicar");
+        swap = keyboard.nextInt();
+
+
+
     }
 }
