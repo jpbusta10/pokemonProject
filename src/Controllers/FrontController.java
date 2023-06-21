@@ -60,4 +60,24 @@ public class FrontController {
         return myGame.getSquadSize();
     }
 
+    public static void swapPokemon (int posX, int posY)
+    {
+        myGame.swapPokemon(posX, posY);
+    }
+
+    public static void storageView ()
+    {
+        myGame.storageView();
+    }
+
+    public static int storageSize ()
+    {
+        return myGame.storageSize();
+    }
+
+    public static void switchPokemon (int indexToSquad, int indexToStorage)
+    {
+        myGame.switchPokemon(indexToSquad, indexToStorage);
+    }
+
 }

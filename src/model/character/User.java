@@ -58,11 +58,32 @@ public class User extends Character {
 
     public void storageView ()
     {
+        ArrayList <Pokemon> storagedPokemons = storageToArray();
+        for (Pokemon aux :
+                storagedPokemons) {
+            System.out.println(storagedPokemons.indexOf(aux)+1 + ") " + aux.toString());
+        }
+    }
+
+    public ArrayList storageToArray ()
+    {
+        ArrayList<Pokemon> storagedPokemons = new ArrayList<>();
         Iterator it = pokemonStorage.entrySet().iterator();
         while (it.hasNext())
         {
-            System.out.println(it.next());
+            Map.Entry me = (Map.Entry) it.next();
+            if (me.getValue() instanceof Pokemon)
+            {
+                Pokemon aux = (Pokemon) me.getValue();
+                storagedPokemons.add(aux);
+            }
         }
+        return storagedPokemons;
+    }
+
+    public int getStorageSize ()
+    {
+        return pokemonStorage.size();
     }
 
     @Override

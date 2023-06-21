@@ -83,8 +83,29 @@ public class Game {
         return myUser.getSquadSize();
     }
 
+    public void swapPokemon (int posX, int posY)
+    {
+        myUser.swapPokemon(posX, posY);
+    }
+
     public String getPokemonData (int indexOfPokemon)
     {
         return myUser.pokemonData(indexOfPokemon);
+    }
+
+    public void storageView ()
+    {
+        myUser.storageView();
+    }
+
+    public int storageSize ()
+    {
+        return myUser.getStorageSize();
+    }
+
+    public void switchPokemon (int indexToSquad, int indexToStorage)
+    {
+        myUser.
+        myUser.switchPokemon(toSquad, toStorage);
     }
 }

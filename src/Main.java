@@ -143,16 +143,16 @@ public class Main {
 
     static void menuPokemon (){
         keyboard = new Scanner(System.in);
-        System.out.println("presione caulquier tecla para continuar");
+        System.out.println("presione cualquier tecla para continuar");
         keyboard.nextLine();
         int option = 0;
         while(option != 9) {
             FrontController.getSquad();
             System.out.println("9. salir");
             option = keyboard.nextInt();
-            if(option > 0 && option < FrontController.getSquadSize())
+            if(option >= 1 && option <= FrontController.getSquadSize())
             {
-                //menuAcciones le paso option
+                menuAcciones(option - 1);
             }
             else if (option != 9)
             {
@@ -164,7 +164,7 @@ public class Main {
     static void menuAcciones (int indexOfPokemon)
     {
         keyboard = new Scanner(System.in);
-        System.out.println("presione caulquier tecla para continuar");
+        System.out.println("presione cualquier tecla para continuar");
         keyboard.nextLine();
         int option = 0;
         while (option != 9)
@@ -181,8 +181,7 @@ public class Main {
                     System.out.println(FrontController.getPokemonData(indexOfPokemon));
                     break;
                 case 2:
-
-                    //Esto hacerlo en otro metodo y verificar que la posicion no sea la misma del pokemon que quiere cambiar y que este dentro del rango.
+                    menuSwap(indexOfPokemon);
                     break;
                 case 3:
 
@@ -200,14 +199,33 @@ public class Main {
     {
         int swap = 0;
         keyboard = new Scanner(System.in);
-        System.out.println("presione caulquier tecla para continuar");
+        System.out.println("presione cualquier tecla para continuar");
         keyboard.nextLine();
-        while ((swap < 0 || swap > FrontController.getSquadSize()) && swap == indexOfPokemon)
+        do //Va a repetir mientras que swap no se encuentre entre el rango de opciones y sea igual al indice del pokemon que quiero cambiar
+        {
+            FrontController.getSquad();
+            System.out.println("Ingrese la posicion en la que lo quiere ubicar");
+            System.out.println("La posicion debe estar dentro del rango disponible y no puede ser la misma del pokemon que se quiere cambiar");
+            swap = keyboard.nextInt();
+        }while ((swap < 1 || swap > FrontController.getSquadSize()) || swap == indexOfPokemon+1);
+        FrontController.swapPokemon(indexOfPokemon, swap-1);
+        System.out.println("El equipo quedo de la siguiente manera");
         FrontController.getSquad();
-        System.out.println("Ingrese la posicion en la que lo quiere ubicar");
-        swap = keyboard.nextInt();
+    }
 
-
+    static void menuSwapStorage (int indexOfPokemon)
+    {
+        int swap = 0;
+        keyboard = new Scanner(System.in);
+        System.out.println("presione cualquier tecla para continuar");
+        keyboard.nextLine();
+        do
+        {
+            FrontController.storageView();
+            System.out.println("Ingrese el numero del pokemon a cambiar");
+            System.out.println("La posicion debe estar dentro del rango disponible");
+            swap = keyboard.nextInt();
+        }while (swap < 1 || swap > FrontController.storageSize());
 
     }
 }
