@@ -116,7 +116,7 @@ public class Main {
         }
 
     }
-    static boolean menuPelea(){
+    static void menuPelea(){
         keyboard = new Scanner(System.in);
         int opcion=0;
         System.out.println("presione cualquier tecla para continuar");
@@ -134,7 +134,6 @@ public class Main {
         System.out.println(FrontController.safeUserPokemonReturn(opcion));
         System.out.println("Que habilidad deseas utilizar: \n");
         opcion= keyboard.nextInt();
-
 
     }
 
