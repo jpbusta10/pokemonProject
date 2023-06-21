@@ -40,12 +40,12 @@ public class Championship {
         surge.addPokemon(JsonController.PokemonByID(100));
         this.gyms.get(2).addTrainer(surge);
     }
-
     public ArrayList getGyms(){
         ArrayList<Gym> copyGyms = new ArrayList<>(gyms.size());
         copyGyms.addAll(gyms);
         return copyGyms;
     }
+
 
 
 

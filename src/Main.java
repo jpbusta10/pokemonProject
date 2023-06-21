@@ -134,6 +134,29 @@ public class Main {
         boolean seguir = true;
         while(seguir == true){
             System.out.println("estas en " + FrontController.getTodoGymName());
+            seguir = menuPeleaCampeonato();
+        }
+    }
+    static boolean menuPeleaCampeonato(){
+        boolean rta = true;
+        int idPokemon;
+        String pokemonTrainer;
+        keyboard = new Scanner(System.in);
+        String nombreTrainer = FrontController.getToDoTrainerName();
+        System.out.println("estas pelendo contra "+nombreTrainer);
+        System.out.println(nombreTrainer +" va a iniciar la pelea");
+        System.out.println("elija que pokemon desea utilizar");
+        System.out.println(FrontController.getMyPokemons());
+        idPokemon = keyboard.nextInt();
+        pokemonTrainer = FrontController.chooceRandomPokemom();
+        System.out.println(nombreTrainer+" a elegido a "+pokemonTrainer);
+
+
+        return false;
+    }
+    static void ataquePokemon(int idPokemon, String nombrePokemonTrainer){
+        boolean rta = true;
+        while(rta == true){
 
         }
     }

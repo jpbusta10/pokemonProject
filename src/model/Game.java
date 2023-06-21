@@ -8,6 +8,7 @@ import java.util.Random;
 import Controllers.JsonController;
 import model.biomes.Gym;
 import model.character.Character;
+import model.character.Trainer;
 import model.character.User;
 
 public class Game {
@@ -72,5 +73,16 @@ public class Game {
         }
         return rta;
     }
+    public Trainer getCurrentTrainer(){
+        return getToDoGym().getTrainer();
+    }
+    public ArrayList<Pokemon> getMyPokemons(){
+        ArrayList<Pokemon> pokemons = myUser.getSquad();
+        return pokemons;
+    }
+    public Pokemon chooceRandomPokemon(Trainer myTrainer){
+        return myTrainer.getRandomPokemon();
+    }
+
 
 }

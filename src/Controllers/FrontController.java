@@ -2,6 +2,7 @@ package Controllers;
 import model.Game;
 import model.Pokemon;
 import model.biomes.Gym;
+import model.character.Trainer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -44,6 +45,25 @@ public class FrontController {
         Gym gym = myGame.getToDoGym();
         return gym.getName();
     }
+    public static String getToDoTrainerName(){
+        Trainer myTrainer = myGame.getCurrentTrainer();
+        return myTrainer.getName();
+    }
+    public static String getMyPokemons(){
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Pokemon> pokemons = myGame.getMyPokemons();
+        int id = 0;
+        for(Pokemon data: pokemons){
+            sb.append(id + ": "+ data.getName()+"\n");
+            id++;
+        }
+        return sb.toString();
+    }
+    public static String chooceRandomPokemom(){
+        return myGame.getCurrentTrainer().getRandomPokemon().getName();
+    }
+
+
 
 
 

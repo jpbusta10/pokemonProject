@@ -1,5 +1,6 @@
 package model;
 
+import Controllers.JsonController;
 import model.Ability;
 
 import java.util.ArrayList;
@@ -33,6 +34,9 @@ public class Pokemon {
     public Pokemon() {
         this.habilidades = new ArrayList<>();
         this.tipos = new ArrayList<>();
+    }
+    public ArrayList<Ability> getHabilidades(){
+        return (ArrayList<Ability>) this.habilidades.clone();
     }
 
     public String getName() {
@@ -105,6 +109,42 @@ public class Pokemon {
 
     public void setCurrentLife(int currentLife) {
         this.currentLife = currentLife;
+    }
+    public Ability randomAbilitie(){  ///returns a random abilitie
+        int random = (int)(Math.random()*habilidades.size());
+        return habilidades.get(random);
+    }
+    public static int escalado(int dato) {
+        dato = dato + (dato * 10) / 100;
+        return dato;
+    }
+
+    public static Pokemon Evolucion(Pokemon pokemon){
+        Pokemon evolucion= JsonController.PokemonByID(pokemon.idEvolution);
+        Pokemon.Balanceo(evolucion);
+        return evolucion;
+    }
+    public static Pokemon levelup(Pokemon pokemon) {
+        for (int i = 0; i < pokemon.habilidades.size(); i++) {
+            pokemon.habilidades.get(i).setDamage(escalado(pokemon.habilidades.get(i).getDamage()));
+        }
+        pokemon.setMaxLife(escalado(pokemon.getMaxLife()));
+        pokemon.setLevel(pokemon.getLevel()+1);
+        if(pokemon.getLevel()==20){
+            if((Integer)pokemon.getIdEvolution()!=null){
+                pokemon=Pokemon.Evolucion(pokemon);
+            }
+        }
+        return pokemon;
+    }
+    public static void Balanceo(Pokemon pokemon){
+        for (int i=0;i<pokemon.getLevel();i++){
+            for (int j = 0; j< pokemon.habilidades.size(); j++) {
+                pokemon.habilidades.get(j).setDamage(escalado(pokemon.habilidades.get(j).getDamage()));
+            }
+            pokemon.setMaxLife(escalado(pokemon.getMaxLife()));
+        }
+        pokemon.setCurrentLife(pokemon.getMaxLife());
     }
 
     @Override
