@@ -45,6 +45,18 @@ public class Championship {
         copyGyms.addAll(gyms);
         return copyGyms;
     }
+    public Gym getGymById(int id){
+        return gyms.get(id);
+    }
+    public Gym getGymByName(String name){
+        Gym rta = null;
+        for( Gym data: gyms){
+            if(data.getName().equals(name)){
+                rta = data;
+            }
+        }
+        return rta;
+    }
 
 
 

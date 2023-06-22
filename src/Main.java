@@ -99,18 +99,19 @@ public class Main {
         }
 
     }
-    static  void menuCampeonato(){
+
+    static void menuCampeonato() {
         keyboard = new Scanner(System.in);
         System.out.println("presione cualquier tecla para continuar");
         keyboard.nextLine();
         int option = 0;
         boolean seguir = true;
-        while(seguir == true){
+        while (seguir == true) {
             System.out.println("1. ver tu progreso");
             System.out.println("2. continuar el campeonato");
             System.out.println("9. salir");
-           option = keyboard.nextInt();
-            switch(option){
+            option = keyboard.nextInt();
+            switch (option) {
                 case 1:
                     System.out.println("Not finished gyms: ");
                     System.out.println(FrontController.getFinishedGymsNames());
@@ -128,39 +129,45 @@ public class Main {
         }
 
     }
-    static void gimnacio(){
+
+    static void gimnacio() {
         keyboard = new Scanner(System.in);
         int option = 0;
         boolean seguir = true;
-        while(seguir == true){
+        while (seguir == true) {
             System.out.println("estas en " + FrontController.getTodoGymName());
             seguir = menuPeleaCampeonato();
         }
     }
-    static boolean menuPeleaCampeonato(){
+
+    static boolean menuPeleaCampeonato() {
         boolean rta = true;
         int idPokemon;
         String pokemonTrainer;
         keyboard = new Scanner(System.in);
         String nombreTrainer = FrontController.getToDoTrainerName();
-        System.out.println("estas pelendo contra "+nombreTrainer);
-        System.out.println(nombreTrainer +" va a iniciar la pelea");
+        System.out.println("estas pelendo contra " + nombreTrainer);
+        System.out.println(nombreTrainer + " va a iniciar la pelea");
         System.out.println("elija que pokemon desea utilizar");
         System.out.println(FrontController.getMyPokemons());
         idPokemon = keyboard.nextInt();
         pokemonTrainer = FrontController.chooceRandomPokemom();
-        System.out.println(nombreTrainer+" a elegido a "+pokemonTrainer);
-
+        System.out.println(nombreTrainer + " a elegido a " + pokemonTrainer);
+        ataquePokemon(idPokemon, pokemonTrainer, FrontController.getTodoGymName());
 
         return false;
     }
-    static void ataquePokemon(int idPokemon, String nombrePokemonTrainer){
-        boolean rta = true;
-        while(rta == true){
 
+    static void ataquePokemon(int idPokemon, String nombrePokemonTrainer, String gymName) {
+        boolean rta = true;
+        while (rta == true) {
+            String res = FrontController.attackFromTrainer(idPokemon, nombrePokemonTrainer, gymName);
+           if(res == null){
+               System.out.println(FrontController.getUserPokemonNameByid(idPokemon) + "murio");
+               rta = false;
+           }
         }
     }
-
 
 
 }

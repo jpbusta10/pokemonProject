@@ -1,4 +1,5 @@
 package Controllers;
+import model.Ability;
 import model.Game;
 import model.Pokemon;
 import model.biomes.Gym;
@@ -61,6 +62,23 @@ public class FrontController {
     }
     public static String chooceRandomPokemom(){
         return myGame.getCurrentTrainer().getRandomPokemon().getName();
+    }
+    public static String getUserPokemonNameByid(int id){
+       return myGame.getUserPokemon(id).getName();
+    }
+    public static String attackFromTrainer(int idPokemon, String trainerPokemonName, String gymName){
+        Pokemon userPokemon = myGame.getUserPokemon(idPokemon);
+        Gym myGym = myGame.getGymByName(gymName);
+        Pokemon trainerPokemon = myGym.getTrainer().getPokemonbyName(trainerPokemonName);
+        Pokemon.Balanceo(trainerPokemon);
+        Ability attack = trainerPokemon.randomAbilitie();
+        userPokemon.setCurrentLife(userPokemon.getCurrentLife()-attack.getDamage());
+        String response = trainerPokemonName + "le ah hecho "+attack.getDamage()+" a "+userPokemon.getName();
+        if(userPokemon.getCurrentLife()<=0){
+            userPokemon.setAlive(false);
+            response = null;
+        }
+        return response;
     }
 
 

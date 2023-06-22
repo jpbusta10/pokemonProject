@@ -51,6 +51,15 @@ public class Character {
         int random = (int) (Math.random() *squad.size());
         return squad.get(random);
     }
+    public Pokemon getPokemonbyName(String name){
+        Pokemon rta = null;
+        for(Pokemon data: squad){
+            if(data.getName().equals(name)){
+                rta = data;
+            }
+        }
+        return rta;
+    }
 
     @Override
     public String toString() {

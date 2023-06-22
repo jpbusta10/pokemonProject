@@ -17,6 +17,7 @@ public class Pokemon {
     private int experience;
     private int maxLife; //aumenta con el nivel
     private int currentLife;
+    private boolean isAlive;
 
     public Pokemon(String name, int id, int idPokedex, int idEvolution, int level, int experience, int maxLife, int currentLife) {
         this.name = name;
@@ -29,14 +30,24 @@ public class Pokemon {
         this.maxLife = maxLife;
         this.currentLife = currentLife;
         this.idPokedex = idPokedex;
+        this.isAlive = true;
     }
 
     public Pokemon() {
         this.habilidades = new ArrayList<>();
         this.tipos = new ArrayList<>();
+        this.isAlive = true;
     }
     public ArrayList<Ability> getHabilidades(){
         return (ArrayList<Ability>) this.habilidades.clone();
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
     }
 
     public String getName() {

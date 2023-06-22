@@ -83,6 +83,12 @@ public class Game {
     public Pokemon chooceRandomPokemon(Trainer myTrainer){
         return myTrainer.getRandomPokemon();
     }
+    public Pokemon getUserPokemon(int id){
+        return myUser.getPokemon(id);
+    }
+    public Gym getGymByName(String name){
+      return myChampionship.getGymByName(name);
+    }
 
 
 }
