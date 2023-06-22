@@ -68,7 +68,7 @@ public class Game {
         Pokemon nuevo = controller.RandomPokemon(tipo);
         nuevo.setIdPokedex(idPokemon + 1);
         idPokemon++;
-        Trainer trainer = new Trainer("Wild"+ nuevo.getName());
+        Trainer trainer = new Trainer("Wild "+ nuevo.getName());
         trainer.addPokemon(nuevo);
         return trainer;
     }

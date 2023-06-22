@@ -1,5 +1,6 @@
 import Controllers.ApiController;
 import Controllers.FrontController;
+import Controllers.JsonController;
 import model.Pokemon;
 import model.biomes.Biome;
 
@@ -123,6 +124,7 @@ public class Main {
                     break;
                 case 9:
                     seguir = false;
+                    break;
             }
 
 
@@ -145,13 +147,13 @@ public class Main {
         int opcion;
         System.out.println("presione cualquier tecla para continuar");
         keyboard.nextLine();
-        for (int i=0;i<10;i++){
+        for (int i=0;i<4;i++){
             System.out.println("\n");
         }
-        while(continuar) {
+        while(continuar==true) {
             System.out.println("||||||||||||||||||||||||||||||||||||||\n");
             System.out.println("Que bioma deseas explorar?");
-            System.out.println("||||||||||||||||||||||||||||||||||||||\n");
+            System.out.println("||||||||||||||||||||||||||||||||||||||");
             System.out.println("OPCIONES:");
             System.out.println("\n");
             System.out.println("1: VOLCAN");
@@ -163,7 +165,8 @@ public class Main {
             FrontController.logicaCazarPokemones(opcion);
             menuPeleaExploration();
             keyboard.nextLine();
-            for (int i = 0; i < 10; i++) {
+            keyboard.nextLine();
+            for (int i = 0; i < 4; i++) {
                 System.out.println("\n");
             }
             System.out.println("Que desea hacer:\n");
@@ -176,6 +179,7 @@ public class Main {
             switch (opcion){
                 case 1:
                     System.out.println(FrontController.catchpokemon());
+                    continuar=false;
                     break;
                 case 2:
                     break;
@@ -195,27 +199,31 @@ public class Main {
         for (int i = 0; i < 10; i++) {
             System.out.println("\n");
         }
-        System.out.println("|||||||||||||||||||COMIENZA EL COMBATE|||||||||||||||||||\n");
-        System.out.println("\n");
+        System.out.println("|||||||||||||||||||COMIENZA EL COMBATE|||||||||||||||||||");
         System.out.println(FrontController.getPokemonSalvaje());
         System.out.println("Empiezas tu\n");
         System.out.println("Que Pokemon deseas usar?\n");
         System.out.println(FrontController.getMyPokemons());
         System.out.println("PRECIONA 0/1/2 PARA ELEGIR EL POKEMON RESPECTIVAMENTE");
         opcion = keyboard.nextInt();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 4; i++) {
             System.out.println("\n");
         }
-        while(FrontController.chequeadorDeVida()) {
+        while(FrontController.chequeadorDeVidaRival()==true) {
             System.out.println(FrontController.safeUserPokemonReturn(opcion));
             System.out.println("Que habilidad deseas utilizar: \n");
-            System.out.println(FrontController.safePokemonAbilities(opcion));
+            System.out.println(FrontController.getPokemonAbilities(opcion));
+            System.out.println("PRECIONA 0/1 PARA ELEGIR LA HABILIDAD RESPECTIVAMENTE");
             habilidad = keyboard.nextInt();
             System.out.println("utilizaste: " + FrontController.safePokemonAbiliti(opcion, habilidad));
-            FrontController.balancear(opcion);
             System.out.println(FrontController.logicaPeleaExploration(opcion, habilidad));
-            System.out.println(FrontController.logicaPeleaExplorationInversa(opcion));
+            if(FrontController.chequeadorDeVidaRival()==true&&FrontController.chequeadorDeVidaPropia(opcion)==true) {
+                System.out.println("Es el turno del rival\n");
+                System.out.println(FrontController.getPokemonSalvaje() + " Utilizo: " + FrontController.safePokemonAbilitiRival(0, 0));
+                System.out.println(FrontController.logicaPeleaExplorationInversa(opcion));
+            }
         }
-        
+        System.out.println("|||||||||||||||||||  GANASTE!  |||||||||||||||||||");
+
     }
 }

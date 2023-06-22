@@ -135,11 +135,15 @@ public class Pokemon {
 
     @Override
     public String toString() {
-        return  name + '\'' +
+        return  name + '\n' +
                 "nivel=" + level;
     }
-    public static int escalado(int dato) {
-        dato = dato + (dato * 10) / 100;
+    public static int escaladodmg(int dato) {
+        dato = dato + 3;
+        return dato;
+    }
+    public static int escaladovida(int dato) {
+        dato = dato + 5;
         return dato;
     }
 
@@ -150,9 +154,9 @@ public class Pokemon {
     }
     public static Pokemon levelup(Pokemon pokemon) {
         for (int i = 0; i < pokemon.habilidades.size(); i++) {
-            pokemon.habilidades.get(i).setDamage(escalado(pokemon.habilidades.get(i).getDamage()));
+            pokemon.habilidades.get(i).setDamage(escaladodmg(pokemon.habilidades.get(i).getDamage()));
         }
-        pokemon.setMaxLife(escalado(pokemon.getMaxLife()));
+        pokemon.setMaxLife(escaladovida(pokemon.getMaxLife()));
         pokemon.setLevel(pokemon.getLevel()+1);
         if(pokemon.getLevel()==20){
             if((Integer)pokemon.getIdEvolution()!=null){
@@ -162,17 +166,20 @@ public class Pokemon {
         return pokemon;
     }
     public static void Balanceo(Pokemon pokemon){
-        for (int i=0;i<pokemon.getLevel();i++){
+        for (int i=1;i<=pokemon.getLevel();i++){
+            System.out.println("nivel="+i);
             for (int j = 0; j< pokemon.habilidades.size(); j++) {
-                pokemon.habilidades.get(j).setDamage(escalado(pokemon.habilidades.get(j).getDamage()));
+                pokemon.habilidades.get(j).setDamage(escaladodmg(pokemon.habilidades.get(j).getDamage()));
+                System.out.println("dano:"+pokemon.habilidades.get(j).getDamage());
             }
-            pokemon.setMaxLife(escalado(pokemon.getMaxLife()));
+            pokemon.setMaxLife(escaladovida(pokemon.getMaxLife()));
+            System.out.println("vida="+pokemon.getMaxLife());
         }
         pokemon.setCurrentLife(pokemon.getMaxLife());
     }
 
-    public String getHabilidades() {
-        return habilidades.toString();
+    public ArrayList<Ability> getHabilidades(){
+        return (ArrayList<Ability>) this.habilidades.clone();
     }
 
     public String getHabilidadString(int opcion){

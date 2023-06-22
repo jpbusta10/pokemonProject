@@ -15,6 +15,8 @@ public class JsonController {
         nuevo.setName(poki.getString("name"));
         nuevo.setLevel(poki.getInt("level"));
         nuevo.setId(poki.getInt("id"));
+        nuevo.setMaxLife(30);
+        nuevo.setCurrentLife(nuevo.getMaxLife());
         if(!poki.isNull("id_evolution")) {
             nuevo.setIdEvolution(poki.getInt("id_evolution"));
         }
@@ -36,6 +38,8 @@ public class JsonController {
         nuevo.setName(poki.getString("name"));
         nuevo.setLevel(poki.getInt("level"));
         nuevo.setId(poki.getInt("id"));
+        nuevo.setMaxLife(30);
+        nuevo.setCurrentLife(nuevo.getMaxLife());
         if(!poki.isNull("id_evolution")) {
             nuevo.setIdEvolution(poki.getInt("id_evolution"));
         }

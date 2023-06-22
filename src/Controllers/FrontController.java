@@ -1,4 +1,5 @@
 package Controllers;
+import model.Ability;
 import model.Game;
 import model.Pokemon;
 import model.biomes.Biome;
@@ -64,14 +65,13 @@ public class FrontController {
         return myGame.getMyUser().getPokemonFromSquad(opcion).toString();
     }
 
-    public static String safePokemonAbilities(int opcion) {
-        return myGame.getMyUser().getPokemonFromSquad(opcion).getHabilidades();
-    }
-
     public static String safePokemonAbiliti(int opcion, int habilidad) {
         return myGame.getMyUser().getPokemonFromSquad(opcion).getHabilidadString(habilidad);
     }
 
+    public static String safePokemonAbilitiRival(int opcion, int habilidad) {
+        return myGame.getActual().getPokemonFromSquad(opcion).getHabilidadString(habilidad);
+    }
 
     public static String getPokemonSalvaje() {
         return myGame.getActual().getSquad().toString();
@@ -110,31 +110,71 @@ public class FrontController {
     public static String logicaPeleaExploration(int opcion, int habilidad) {
         String aux = "";
         if (Pokemon.peleaPokemon(myGame.getMyUser().getPokemonFromSquad(opcion).getHabilidad(habilidad).getDamage(), myGame.getActual().getPokemonFromSquad(0)) > 0) {
-            return "vida restante de" + myGame.getActual().getPokemonFromSquad(0).toString()+":"+myGame.getActual().getPokemonFromSquad(0).getCurrentLife();
+            return "vida restante de " + myGame.getActual().getPokemonFromSquad(0).toString()+": "+myGame.getActual().getPokemonFromSquad(0).getCurrentLife();
         } else {
-            return "El pokemon" + myGame.getActual().getPokemonFromSquad(0).toString() + "no sobrevivio";
+            return "El pokemon " + myGame.getActual().getPokemonFromSquad(0).toString() + " no sobrevivio";
         }
     }
 
-    public static boolean chequeadorDeVida(){
+    /**
+     * Method that returns true if the rival Pokemon stills has lifepoints;
+     * Also returns false if pokemon lifepoints dropped bellow 0;
+     * @return boolean;
+     */
+    public static boolean chequeadorDeVidaRival(){
         boolean respuesta=false;
         if(myGame.getActual().getPokemonFromSquad(0).getCurrentLife()>0){
             respuesta=true;
         }
         return respuesta;
     }
+    /**
+     * Method that returns true if my own Pokemon stills has lifepoints;
+     * Also returns false if the Pokemon lifepoints dropped bellow 0;
+     * @return boolean;
+     */
+    public static boolean chequeadorDeVidaPropia(int opcion){
+        boolean respuesta=false;
+        if(myGame.getMyUser().getPokemonFromSquad(opcion).getCurrentLife()>0){
+            respuesta=true;
+        }
+        return respuesta;
+    }
+
+    /**
+     * Method that attacks from the rival to your current Pokemon;
+     * Receives an option from the user.
+     * @param int opcion.
+     * @return String;
+     */
     public static String logicaPeleaExplorationInversa(int opcion){
         String aux="";
         if(Pokemon.peleaPokemon(myGame.getActual().getPokemonFromSquad(0).getHabilidad(0).getDamage(),myGame.getMyUser().getPokemonFromSquad(opcion))>0) {
-            return "vida restante de" + myGame.getMyUser().getPokemonFromSquad(0).toString()+":"+myGame.getMyUser().getPokemonFromSquad(0).getCurrentLife();
+            return "vida restante de " + myGame.getMyUser().getPokemonFromSquad(0).toString()+": "+myGame.getMyUser().getPokemonFromSquad(0).getCurrentLife();
         }else {
-            return "El pokemon"+myGame.getMyUser().getPokemonFromSquad(opcion).toString()+"no sobrevivio";
+            return "El pokemon "+myGame.getMyUser().getPokemonFromSquad(opcion).toString()+" no sobrevivio";
         }
     }
 
     public static String catchpokemon(){
         myGame.getMyUser().addPokemonToStorage(myGame.getActual().getPokemonFromSquad(0));
         return "El poquemon ha sido capturado con exito";
+    }
+
+    /**
+     * Generates a StringBuilder from a clone of the Ability Arraylist and separates them with an id.
+     * @param int opcion
+     * @return
+     */
+    public static String getPokemonAbilities(int opcion) {
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Ability> habilidades = myGame.getMyUser().getPokemonFromSquad(opcion).getHabilidades();
+        int id = 0;
+        for (Ability data : habilidades) {
+            sb.append(id + ": " + data.getName() + "\n");
+            id++;
+        }
+        return sb.toString();
     }
 
 
