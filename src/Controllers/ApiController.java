@@ -63,6 +63,7 @@ public class ApiController {
             connection.setRequestMethod("GET");
             connection.connect();
             int responsecode = connection.getResponseCode();
+            System.out.println(responsecode+"codigo respuesta");
             if(responsecode!=200){
                 throw new RuntimeException("Codigo de error"+responsecode);
             }

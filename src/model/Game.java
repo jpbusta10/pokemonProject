@@ -8,6 +8,7 @@ import java.util.Random;
 import Controllers.JsonController;
 import model.biomes.Gym;
 import model.character.Character;
+import model.character.Trainer;
 import model.character.User;
 
 public class Game {
@@ -19,6 +20,7 @@ public class Game {
     private User myUser;
     private int idPokemon; ///actual id pokemon
     private Championship myChampionship;
+    private Trainer actual;
 
     public Game() {
     }
@@ -28,13 +30,37 @@ public class Game {
         myChampionship = new Championship();
     }
 
+    public User getMyUser() {
+        return myUser;
+    }
+
+    public Biome getForest() {
+        return forest;
+    }
+
+    public Biome getMountain() {
+        return mountain;
+    }
+
+    public Biome getBeach() {
+        return beach;
+    }
+
+    public Biome getCave() {
+        return cave;
+    }
+
+    public Biome getVolcano() {
+        return volcano;
+    }
+
     /**
      * depending of the biome it returns a ramdom pokemon with respective types
      *
      * @param mybiome
      * @return Pokemon
      */
-    public Pokemon Exploration(Biome mybiome) {
+    public Trainer Exploration(Biome mybiome) {
         JsonController controller = new JsonController();
         Random random = new Random();
         int numeroAleatorio = random.nextInt(3) + 1;
@@ -42,7 +68,17 @@ public class Game {
         Pokemon nuevo = controller.RandomPokemon(tipo);
         nuevo.setIdPokedex(idPokemon + 1);
         idPokemon++;
-        return nuevo;
+        Trainer trainer = new Trainer("Wild"+ nuevo.getName());
+        trainer.addPokemon(nuevo);
+        return trainer;
+    }
+
+    public void setActual(Trainer actual) {
+        this.actual = actual;
+    }
+
+    public Trainer getActual() {
+        return actual;
     }
 
     public boolean addPokemonUser(Pokemon newPokemon) {
@@ -73,4 +109,8 @@ public class Game {
         return rta;
     }
 
+    public ArrayList<Pokemon> getMyPokemons(){
+        ArrayList<Pokemon> pokemons = myUser.getSquad();
+        return pokemons;
+    }
 }

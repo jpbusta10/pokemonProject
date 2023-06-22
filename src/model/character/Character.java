@@ -34,11 +34,20 @@ public class Character {
         return response;
     }
 
+    public ArrayList<Pokemon> getSquad() {
+        return (ArrayList<Pokemon>) this.squad.clone();
+    }
+
     @Override
     public String toString() {
-        return "Character{" +
-                "name='" + name + '\'' +
-                ", squad=" + squad +
-                '}';
+        return "Character:" +
+                "" + name + '\'' +
+                "" + squad;
     }
+
+    public Pokemon getPokemonFromSquad(int opcion){
+        Pokemon aux= squad.get(opcion);
+        return aux;
+    }
+
 }

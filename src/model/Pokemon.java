@@ -1,6 +1,7 @@
 package model;
 
 import model.Ability;
+import Controllers.JsonController;
 
 import java.util.ArrayList;
 
@@ -134,13 +135,56 @@ public class Pokemon {
 
     @Override
     public String toString() {
-        return "Pokemon{" +
-                "name='" + name + '\'' +
-                ", tipos=" + tipos +
-                ", habilidades=" + habilidades +
-                ", id=" + id +
-                ", nivel=" + level +
-                ", id_evolution=" + idEvolution +
-                '}';
+        return  name + '\'' +
+                "nivel=" + level;
+    }
+    public static int escalado(int dato) {
+        dato = dato + (dato * 10) / 100;
+        return dato;
+    }
+
+    public static Pokemon Evolucion(Pokemon pokemon){
+        Pokemon evolucion=JsonController.PokemonByID(pokemon.idEvolution);
+        Pokemon.Balanceo(evolucion);
+        return evolucion;
+    }
+    public static Pokemon levelup(Pokemon pokemon) {
+        for (int i = 0; i < pokemon.habilidades.size(); i++) {
+            pokemon.habilidades.get(i).setDamage(escalado(pokemon.habilidades.get(i).getDamage()));
+        }
+        pokemon.setMaxLife(escalado(pokemon.getMaxLife()));
+        pokemon.setLevel(pokemon.getLevel()+1);
+        if(pokemon.getLevel()==20){
+            if((Integer)pokemon.getIdEvolution()!=null){
+                pokemon=Pokemon.Evolucion(pokemon);
+            }
+        }
+        return pokemon;
+    }
+    public static void Balanceo(Pokemon pokemon){
+        for (int i=0;i<pokemon.getLevel();i++){
+            for (int j = 0; j< pokemon.habilidades.size(); j++) {
+                pokemon.habilidades.get(j).setDamage(escalado(pokemon.habilidades.get(j).getDamage()));
+            }
+            pokemon.setMaxLife(escalado(pokemon.getMaxLife()));
+        }
+        pokemon.setCurrentLife(pokemon.getMaxLife());
+    }
+
+    public String getHabilidades() {
+        return habilidades.toString();
+    }
+
+    public String getHabilidadString(int opcion){
+        return habilidades.get(opcion).toString();
+    }
+
+    public Ability getHabilidad(int opcion){
+        return habilidades.get(opcion);
+    }
+
+    public static int peleaPokemon(int dmg,Pokemon atacado){
+        atacado.setCurrentLife(atacado.getCurrentLife()-dmg);
+        return atacado.getCurrentLife();
     }
 }
