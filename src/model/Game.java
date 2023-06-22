@@ -94,6 +94,11 @@ public class Game {
     public Gym getGymByName(String name){
       return myChampionship.getGymByName(name);
     }
-
+    public void resetUser(){
+        for(int i=0; i<myUser.getSquadSize();i++){
+            myUser.getPokemon(i).setAlive(true);
+            myUser.getPokemon(i).setCurrentLife(myUser.getPokemon(i).getMaxLife());
+        }
+    }
 
 }
