@@ -290,4 +290,12 @@ public class FrontController {
         myGame.resetUser();
     }
 
+    public static String mostrarVidaPokemonUser(int opcion){
+        return "vida restante: "+ myGame.getMyUser().getPokemonFromSquad(opcion).getCurrentLife();
+    }
+    public static String mostrarVidaPokemonRival(){
+        return "vida restante: "+myGame.getActual().getPokemonFromSquad(0).getCurrentLife();
+
+    }
+
 }
