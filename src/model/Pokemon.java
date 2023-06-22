@@ -155,13 +155,10 @@ public class Pokemon {
     }
     public static void Balanceo(Pokemon pokemon){
         for (int i=1;i<=pokemon.getLevel();i++){
-            System.out.println("nivel="+i);
             for (int j = 0; j< pokemon.habilidades.size(); j++) {
                 pokemon.habilidades.get(j).setDamage(escaladodmg(pokemon.habilidades.get(j).getDamage()));
-                System.out.println("dano:"+pokemon.habilidades.get(j).getDamage());
             }
             pokemon.setMaxLife(escaladovida(pokemon.getMaxLife()));
-            System.out.println("vida="+pokemon.getMaxLife());
         }
         pokemon.setCurrentLife(pokemon.getMaxLife());
     }

@@ -62,6 +62,7 @@ public class Game {
         int numeroAleatorio = random.nextInt(3) + 1;
         String tipo = mybiome.getTypes(numeroAleatorio);
         Pokemon nuevo = controller.RandomPokemon(tipo);
+        Pokemon.Balanceo(nuevo);
         nuevo.setIdPokedex(idPokemon + 1);
         idPokemon++;
         Trainer trainer = new Trainer("Wild "+ nuevo.getName());
@@ -126,7 +127,7 @@ public class Game {
       return myChampionship.getGymByName(name);
     }
     public void resetUser(){
-        for(int i=0; i<myUser.getSquadSize();i++){
+        for(int i=0; i<myUser.getSquad().size()-1;i++){
             myUser.getPokemon(i).setAlive(true);
             myUser.getPokemon(i).setCurrentLife(myUser.getPokemon(i).getMaxLife());
         }

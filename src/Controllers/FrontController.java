@@ -103,7 +103,6 @@ public class FrontController {
     }
 
     public static void balancear(int opcion) {
-        Pokemon.Balanceo(myGame.getActual().getPokemonFromSquad(0));
         Pokemon.Balanceo(myGame.getMyUser().getPokemonFromSquad(opcion));
     }
 

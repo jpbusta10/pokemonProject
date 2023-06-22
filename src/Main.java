@@ -287,12 +287,13 @@ public class Main {
             System.out.println("\n");
         }
         System.out.println("|||||||||||||||||||COMIENZA EL COMBATE|||||||||||||||||||");
-        System.out.println(FrontController.getPokemonSalvaje());
+        System.out.println("Has encontrado un: "+FrontController.getPokemonSalvaje());
         System.out.println("Empiezas tu\n");
         System.out.println("Que Pokemon deseas usar?\n");
         System.out.println(FrontController.getMyPokemons());
         System.out.println("PRECIONA 0/1/2 PARA ELEGIR EL POKEMON RESPECTIVAMENTE");
         opcion = keyboard.nextInt();
+        FrontController.balancear(opcion);
         for (int i = 0; i < 4; i++) {
             System.out.println("\n");
         }
