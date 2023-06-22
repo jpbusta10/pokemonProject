@@ -1,5 +1,6 @@
 package model;
 
+import Controllers.JsonController;
 import model.Ability;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Pokemon {
     private int experience;
     private int maxLife; //aumenta con el nivel
     private int currentLife;
+    private boolean isAlive;
 
     public Pokemon(String name, int id, int idPokedex, int idEvolution, int level, int experience, int maxLife, int currentLife) {
         this.name = name;
@@ -28,11 +30,24 @@ public class Pokemon {
         this.maxLife = maxLife;
         this.currentLife = currentLife;
         this.idPokedex = idPokedex;
+        this.isAlive = true;
     }
 
     public Pokemon() {
         this.habilidades = new ArrayList<>();
         this.tipos = new ArrayList<>();
+        this.isAlive = true;
+    }
+    public ArrayList<Ability> getHabilidades(){
+        return (ArrayList<Ability>) this.habilidades.clone();
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
     }
 
     public String getName() {
@@ -106,6 +121,45 @@ public class Pokemon {
     public void setCurrentLife(int currentLife) {
         this.currentLife = currentLife;
     }
+    public Ability randomAbilitie(){  ///returns a random abilitie
+        int random = (int)(Math.random()*habilidades.size());
+        return habilidades.get(random);
+    }
+    public static int escalado(int dato) {
+        dato = dato + (dato * 10) / 100;
+        return dato;
+    }
+
+    public static Pokemon Evolucion(Pokemon pokemon){
+        Pokemon evolucion= JsonController.PokemonByID(pokemon.idEvolution);
+        Pokemon.Balanceo(evolucion);
+        return evolucion;
+    }
+    public static Pokemon levelup(Pokemon pokemon) {
+        for (int i = 0; i < pokemon.habilidades.size(); i++) {
+            pokemon.habilidades.get(i).setDamage(escalado(pokemon.habilidades.get(i).getDamage()));
+        }
+        pokemon.setMaxLife(escalado(pokemon.getMaxLife()));
+        pokemon.setLevel(pokemon.getLevel()+1);
+        if(pokemon.getLevel()==20){
+            if((Integer)pokemon.getIdEvolution()!=null){
+                pokemon=Pokemon.Evolucion(pokemon);
+            }
+        }
+        return pokemon;
+    }
+    public static void Balanceo(Pokemon pokemon){
+        for (int i=0;i<pokemon.getLevel();i++){
+            for (int j = 0; j< pokemon.habilidades.size(); j++) {
+                pokemon.habilidades.get(j).setDamage(escalado(pokemon.habilidades.get(j).getDamage()));
+            }
+            pokemon.setMaxLife(escalado(pokemon.getMaxLife()));
+        }
+        pokemon.setCurrentLife(pokemon.getMaxLife());
+    }
+    public Ability getAbilitieById(int id){
+        return habilidades.get(id);
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -141,6 +195,8 @@ public class Pokemon {
                 ", id=" + id +
                 ", nivel=" + level +
                 ", id_evolution=" + idEvolution +
+                ", currentLife=" + currentLife +
+                ", isAlive="+isAlive+
                 '}';
     }
 }
