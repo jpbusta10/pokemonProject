@@ -20,6 +20,7 @@ public class Game {
     private User myUser;
     private int idPokemon; ///actual id pokemon
     private Championship myChampionship;
+    private Trainer actual;
 
     public Game() {
     }
@@ -29,21 +30,52 @@ public class Game {
         myChampionship = new Championship();
     }
 
+    public Biome getForest() {
+        return forest;
+    }
+
+    public Biome getMountain() {
+        return mountain;
+    }
+
+    public Biome getBeach() {
+        return beach;
+    }
+
+    public Biome getCave() {
+        return cave;
+    }
+
+    public Biome getVolcano() {
+        return volcano;
+    }
+
     /**
      * depending on the biome it returns a ramdom pokemon with respective types
      *
      * @param mybiome
      * @return Pokemon
      */
-    public Pokemon Exploration(Biome mybiome) {
+    public Trainer Exploration(Biome mybiome) {
         JsonController controller = new JsonController();
         Random random = new Random();
         int numeroAleatorio = random.nextInt(3) + 1;
         String tipo = mybiome.getTypes(numeroAleatorio);
         Pokemon nuevo = controller.RandomPokemon(tipo);
+        Pokemon.Balanceo(nuevo);
         nuevo.setIdPokedex(idPokemon + 1);
         idPokemon++;
-        return nuevo;
+        Trainer trainer = new Trainer("Wild "+ nuevo.getName());
+        trainer.addPokemon(nuevo);
+        return trainer;
+    }
+
+    public void setActual(Trainer actual) {
+        this.actual = actual;
+    }
+
+    public Trainer getActual() {
+        return actual;
     }
     public User getMyUser(){
         return this.myUser;
@@ -95,10 +127,9 @@ public class Game {
       return myChampionship.getGymByName(name);
     }
     public void resetUser(){
-        for(int i=0; i<myUser.getSquadSize();i++){
+        for(int i=0; i<myUser.getSquad().size()-1;i++){
             myUser.getPokemon(i).setAlive(true);
             myUser.getPokemon(i).setCurrentLife(myUser.getPokemon(i).getMaxLife());
         }
     }
-
 }

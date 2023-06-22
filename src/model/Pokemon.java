@@ -2,6 +2,7 @@ package model;
 
 import Controllers.JsonController;
 import model.Ability;
+import Controllers.JsonController;
 
 import java.util.ArrayList;
 
@@ -125,21 +126,25 @@ public class Pokemon {
         int random = (int)(Math.random()*habilidades.size());
         return habilidades.get(random);
     }
-    public static int escalado(int dato) {
-        dato = dato + (dato * 10) / 100;
+    public static int escaladodmg(int dato) {
+        dato = dato + 3;
+        return dato;
+    }
+    public static int escaladovida(int dato) {
+        dato = dato + 5;
         return dato;
     }
 
     public static Pokemon Evolucion(Pokemon pokemon){
-        Pokemon evolucion= JsonController.PokemonByID(pokemon.idEvolution);
+        Pokemon evolucion=JsonController.PokemonByID(pokemon.idEvolution);
         Pokemon.Balanceo(evolucion);
         return evolucion;
     }
     public static Pokemon levelup(Pokemon pokemon) {
         for (int i = 0; i < pokemon.habilidades.size(); i++) {
-            pokemon.habilidades.get(i).setDamage(escalado(pokemon.habilidades.get(i).getDamage()));
+            pokemon.habilidades.get(i).setDamage(escaladodmg(pokemon.habilidades.get(i).getDamage()));
         }
-        pokemon.setMaxLife(escalado(pokemon.getMaxLife()));
+        pokemon.setMaxLife(escaladovida(pokemon.getMaxLife()));
         pokemon.setLevel(pokemon.getLevel()+1);
         if(pokemon.getLevel()==20){
             if((Integer)pokemon.getIdEvolution()!=null){
@@ -149,11 +154,11 @@ public class Pokemon {
         return pokemon;
     }
     public static void Balanceo(Pokemon pokemon){
-        for (int i=0;i<pokemon.getLevel();i++){
+        for (int i=1;i<=pokemon.getLevel();i++){
             for (int j = 0; j< pokemon.habilidades.size(); j++) {
-                pokemon.habilidades.get(j).setDamage(escalado(pokemon.habilidades.get(j).getDamage()));
+                pokemon.habilidades.get(j).setDamage(escaladodmg(pokemon.habilidades.get(j).getDamage()));
             }
-            pokemon.setMaxLife(escalado(pokemon.getMaxLife()));
+            pokemon.setMaxLife(escaladovida(pokemon.getMaxLife()));
         }
         pokemon.setCurrentLife(pokemon.getMaxLife());
     }
@@ -198,5 +203,17 @@ public class Pokemon {
                 ", currentLife=" + currentLife +
                 ", isAlive="+isAlive+
                 '}';
+    }
+    public String getHabilidadString(int opcion){
+        return habilidades.get(opcion).toString();
+    }
+
+    public Ability getHabilidad(int opcion){
+        return habilidades.get(opcion);
+    }
+
+    public static int peleaPokemon(int dmg,Pokemon atacado){
+        atacado.setCurrentLife(atacado.getCurrentLife()-dmg);
+        return atacado.getCurrentLife();
     }
 }

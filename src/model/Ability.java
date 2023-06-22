@@ -27,10 +27,8 @@ public class Ability {
 
     @Override
     public String toString() {
-        return "Habilidad{" +
-                "name='" + name + '\'' +
-                ", damage=" + damage +
-                '}';
+        return "Habilidad:" +
+                name +"\n";
     }
 
 
