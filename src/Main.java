@@ -188,7 +188,6 @@ public class Main {
             return false;
         }
     }
-
     /**
      * ataque del trainer al pokemon del usuario
      * @param idPokemon

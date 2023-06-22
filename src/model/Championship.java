@@ -58,11 +58,4 @@ public class Championship {
         }
         return rta;
     }
-
-
-
-
-
-
-
 }

@@ -68,6 +68,11 @@ public class Game {
         }
         return notPassed;
     }
+
+    /**
+     * returns the first not finished gyms
+     * @return Gym
+     */
     public Gym getToDoGym(){
         ArrayList<Gym> gyms = myChampionship.getGyms();
         Gym rta = null;
@@ -94,6 +99,10 @@ public class Game {
     public Gym getGymByName(String name){
       return myChampionship.getGymByName(name);
     }
+
+    /**
+     * reset the user pokemon to default characteristics
+     */
     public void resetUser(){
         for(int i=0; i<myUser.getSquadSize();i++){
             myUser.getPokemon(i).setAlive(true);
