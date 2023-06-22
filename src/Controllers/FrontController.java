@@ -123,6 +123,7 @@ public class FrontController {
         int id = 0;
         for(Ability data: myPokemon.getHabilidades()){
             sb.append(id+": "+data.getName()+" damage: "+data.getDamage()+"\n");
+            id++;
         }
         return sb.toString();
     }
