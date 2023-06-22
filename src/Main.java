@@ -12,7 +12,6 @@ public class Main {
 
     public static void main(String[] args) {
         initialMenu();
-
     }
 
     static boolean initialMenu() {
@@ -67,8 +66,6 @@ public class Main {
         }
         System.out.println("felicidades ya tiene su Pokemon");
         menuJuego();
-
-
     }
 
     static void menuJuego() {
