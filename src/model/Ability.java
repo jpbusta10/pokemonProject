@@ -29,10 +29,8 @@ public class Ability implements Serializable {
 
     @Override
     public String toString() {
-        return "Habilidad{" +
-                "name='" + name + '\'' +
-                ", damage=" + damage +
-                '}';
+        return "Habilidad:" +
+                name +"\n";
     }
 
 

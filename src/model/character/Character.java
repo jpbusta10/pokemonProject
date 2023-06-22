@@ -95,9 +95,14 @@ public class Character implements Serializable {
 
     @Override
     public String toString() {
-        return "Character{" +
-                "name='" + name + '\'' +
-                ", squad=" + squad +
-                '}';
+        return "Character:" +
+                "" + name + '\'' +
+                "" + squad;
     }
+
+    public Pokemon getPokemonFromSquad(int opcion){
+        Pokemon aux= squad.get(opcion);
+        return aux;
+    }
+
 }
