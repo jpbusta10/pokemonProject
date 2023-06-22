@@ -30,10 +30,6 @@ public class Game {
         myChampionship = new Championship();
     }
 
-    public User getMyUser() {
-        return myUser;
-    }
-
     public Biome getForest() {
         return forest;
     }
@@ -134,10 +130,5 @@ public class Game {
             myUser.getPokemon(i).setAlive(true);
             myUser.getPokemon(i).setCurrentLife(myUser.getPokemon(i).getMaxLife());
         }
-    }
-
-    public ArrayList<Pokemon> getMyPokemons(){
-        ArrayList<Pokemon> pokemons = myUser.getSquad();
-        return pokemons;
     }
 }

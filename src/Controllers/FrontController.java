@@ -174,16 +174,7 @@ public class FrontController {
         Trainer myTrainer = myGame.getCurrentTrainer();
         return myTrainer.getName();
     }
-    public static String getMyPokemons(){
-        StringBuilder sb = new StringBuilder();
-        ArrayList<Pokemon> pokemons = myGame.getMyPokemons();
-        int id = 0;
-        for(Pokemon data: pokemons){
-            sb.append(id + ": "+ data.getName()+"\n");
-            id++;
-        }
-        return sb.toString();
-    }
+
     public static String chooceRandomAlivePokemom(){
         Pokemon trainerPok = myGame.getCurrentTrainer().getRandomAlivePokemon();
         if(trainerPok != null){
@@ -230,7 +221,7 @@ public class FrontController {
 
     /**
      * checks if trainer pokemon is alive
-     * @param pokemonName
+     * @param= pokemonName
      * @return boolean
      */
     public static boolean checkIfAliveTrainer(String pokemonName){

@@ -35,10 +35,6 @@ public class Character {
         return response;
     }
 
-    public ArrayList<Pokemon> getSquad() {
-        return (ArrayList<Pokemon>) this.squad.clone();
-    }
-
     public Pokemon getPokemon(int id) {
         Pokemon rta = this.squad.get(id);
         return rta;

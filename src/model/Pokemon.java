@@ -207,10 +207,6 @@ public class Pokemon {
                 ", isAlive="+isAlive+
                 '}';
     }
-    public ArrayList<Ability> getHabilidades(){
-        return (ArrayList<Ability>) this.habilidades.clone();
-    }
-
     public String getHabilidadString(int opcion){
         return habilidades.get(opcion).toString();
     }
