@@ -139,6 +139,7 @@ public class Main {
         else if(seguir == false){
             System.out.println("perdiste, vas a tener que volver a intentarlo");
         }
+        FrontController.resetUser();
     }
 
     static boolean menuPeleaCampeonato() {
@@ -180,6 +181,7 @@ public class Main {
             }
         }
         if(FrontController.checkIfAbailablePokemonsUser()){
+
             return true;
         }
         else{

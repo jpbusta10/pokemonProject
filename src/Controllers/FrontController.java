@@ -123,6 +123,7 @@ public class FrontController {
         int id = 0;
         for(Ability data: myPokemon.getHabilidades()){
             sb.append(id+": "+data.getName()+" damage: "+data.getDamage()+"\n");
+            id++;
         }
         return sb.toString();
     }
@@ -141,7 +142,7 @@ public class FrontController {
         Pokemon trainerPokemon = myGym.getTrainer().getPokemonbyName(trainerPokemonName);
         Ability myAbilitie = userPokemon.getAbilitieById(abilitieId);
         trainerPokemon.setCurrentLife(trainerPokemon.getCurrentLife()-myAbilitie.getDamage());
-        String response = userPokemon.getName()+" le ah hecho "+myAbilitie.getDamage()+" a "+trainerPokemonName;
+        String response = userPokemon.getName()+" le ah hecho "+myAbilitie.getDamage()+" con "+myAbilitie.getName()+" a "+trainerPokemonName;
         if(trainerPokemon.getCurrentLife() <= 0){
             response = null;
             trainerPokemon.setAlive(false);
@@ -172,14 +173,8 @@ public class FrontController {
     public static void setFinishedGym(){
         myGame.getToDoGym().setPassed(true);
     }
-
-
-
-
-
-
-
-
-
+    public static void resetUser(){
+        myGame.resetUser();
+    }
 
 }
