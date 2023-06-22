@@ -2,6 +2,7 @@ package model;
 
 import model.biomes.Biome;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,7 +12,7 @@ import model.character.Character;
 import model.character.Trainer;
 import model.character.User;
 
-public class Game {
+public class Game implements Serializable {
     Biome forest = Biome.FOREST;
     Biome mountain = Biome.MOUNTAIN;
     Biome beach = Biome.BEACH;
@@ -94,10 +95,15 @@ public class Game {
     public Gym getGymByName(String name){
       return myChampionship.getGymByName(name);
     }
+
+    /**
+     * resets user pokemons to alive and set life back to max
+     */
     public void resetUser(){
-        for(int i=0; i<myUser.getSquadSize();i++){
+        for(int i=0; i<myUser.getSquad().size()-1;i++){
             myUser.getPokemon(i).setAlive(true);
             myUser.getPokemon(i).setCurrentLife(myUser.getPokemon(i).getMaxLife());
+            System.out.println(myUser.getPokemon(i).toString());
         }
     }
 

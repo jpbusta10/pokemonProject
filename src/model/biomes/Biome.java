@@ -1,8 +1,9 @@
 package model.biomes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public enum Biome {
+public enum Biome implements Serializable{
     FOREST("Grass", "Electic", "Bug"), MOUNTAIN("Ground","Flying","Electric"), BEACH("Water","Electric", "Bug"), VOLCANO("fire","Ground","Electric"), CAVE("Poison","Ground", "Bug");
 
     private ArrayList<String> pokemonTypes;

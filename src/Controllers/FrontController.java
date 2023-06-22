@@ -12,9 +12,16 @@ import java.util.ArrayList;
 public class FrontController {
     private static Game myGame;
 
+    /**
+     * creates a game from scratch
+     * @param name
+     */
     public static void NewGame(String name){
         myGame = new Game(name);
         myGame.newChampionship();
+    }
+    public static void loadGame(){
+        myGame = FileController.loadGame();
     }
 
     /**
@@ -25,6 +32,7 @@ public class FrontController {
     public static boolean addPokemonToUserByid(int id){
         boolean rta = false;
         Pokemon newPokemon = JsonController.PokemonByID(id);
+        newPokemon.getAbilitieById(0).setDamage(100);  ///debug
         rta = myGame.addPokemonUser(newPokemon);
         return rta;
     }
@@ -175,6 +183,9 @@ public class FrontController {
     }
     public static void resetUser(){
         myGame.resetUser();
+    }
+    public static void saveGame(){
+        FileController.saveGame(myGame);
     }
 
 }

@@ -28,7 +28,8 @@ public class Main {
                 newGameMenu();
                 break;
             case 2:
-                //carga juego
+                FrontController.loadGame();
+                menuJuego();
                 break;
             case 9:
                 rta = false;
@@ -78,9 +79,10 @@ public class Main {
         boolean seguir = true;
         while (seguir == true) {
             System.out.println("que desea hacer ahora");
-            System.out.println("1.cazar pokemon");
-            System.out.println("2. campeonato");
-            System.out.println("9. salir");
+            System.out.println("1. Cazar pokemon");
+            System.out.println("2. Campeonato");
+            System.out.println("4. Guardar partida");
+            System.out.println("9. Salir");
             int option = 0;
             option = keyboard.nextInt();
             switch (option) {
@@ -90,6 +92,8 @@ public class Main {
                 case 2:
                     menuCampeonato();
                     break;
+                case 4:
+                    FrontController.saveGame();
                 case 9:
                     seguir = false;
                     initialMenu();

@@ -3,9 +3,10 @@ package model;
 import Controllers.JsonController;
 import model.Ability;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pokemon {
+public class Pokemon implements Serializable{
     private String name;
     private String nickName;
     private ArrayList<String> tipos;
