@@ -1,5 +1,6 @@
 package model;
 
+import Controllers.JsonController;
 import model.Ability;
 import Controllers.JsonController;
 
@@ -17,6 +18,7 @@ public class Pokemon {
     private int experience;
     private int maxLife; //aumenta con el nivel
     private int currentLife;
+    private boolean isAlive;
 
     public Pokemon(String name, int id, int idPokedex, int idEvolution, int level, int experience, int maxLife, int currentLife) {
         this.name = name;
@@ -29,11 +31,24 @@ public class Pokemon {
         this.maxLife = maxLife;
         this.currentLife = currentLife;
         this.idPokedex = idPokedex;
+        this.isAlive = true;
     }
 
     public Pokemon() {
         this.habilidades = new ArrayList<>();
         this.tipos = new ArrayList<>();
+        this.isAlive = true;
+    }
+    public ArrayList<Ability> getHabilidades(){
+        return (ArrayList<Ability>) this.habilidades.clone();
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
     }
 
     public String getName() {
@@ -107,36 +122,9 @@ public class Pokemon {
     public void setCurrentLife(int currentLife) {
         this.currentLife = currentLife;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        boolean response = false;
-        if (obj != null)
-        {
-            if (obj instanceof Pokemon)
-            {
-                Pokemon aux = (Pokemon) obj;
-                if (getId() == aux.getId())
-                {
-                    response = true;
-                }
-            }
-        }
-        return response;
-    }
-
-
-    public void agregarArrayListTipo(String tipo){
-        tipos.add(tipo);
-    }
-    public void addAbility(Ability habilidad){
-        habilidades.add(habilidad);
-    }
-
-    @Override
-    public String toString() {
-        return  name +
-                "nivel=" + level;
+    public Ability randomAbilitie(){  ///returns a random abilitie
+        int random = (int)(Math.random()*habilidades.size());
+        return habilidades.get(random);
     }
     public static int escaladodmg(int dato) {
         dato = dato + 3;
@@ -177,7 +165,48 @@ public class Pokemon {
         }
         pokemon.setCurrentLife(pokemon.getMaxLife());
     }
+    public Ability getAbilitieById(int id){
+        return habilidades.get(id);
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        boolean response = false;
+        if (obj != null)
+        {
+            if (obj instanceof Pokemon)
+            {
+                Pokemon aux = (Pokemon) obj;
+                if (getId() == aux.getId())
+                {
+                    response = true;
+                }
+            }
+        }
+        return response;
+    }
+
+
+    public void agregarArrayListTipo(String tipo){
+        tipos.add(tipo);
+    }
+    public void addAbility(Ability habilidad){
+        habilidades.add(habilidad);
+    }
+
+    @Override
+    public String toString() {
+        return "Pokemon{" +
+                "name='" + name + '\'' +
+                ", tipos=" + tipos +
+                ", habilidades=" + habilidades +
+                ", id=" + id +
+                ", nivel=" + level +
+                ", id_evolution=" + idEvolution +
+                ", currentLife=" + currentLife +
+                ", isAlive="+isAlive+
+                '}';
+    }
     public ArrayList<Ability> getHabilidades(){
         return (ArrayList<Ability>) this.habilidades.clone();
     }

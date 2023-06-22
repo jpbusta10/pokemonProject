@@ -22,7 +22,8 @@ public class Championship {
         Pokemon nuevo = new Pokemon();
         nuevo = JsonController.PokemonByID(95); //onix
         brok.addPokemon(nuevo);
-        nuevo = JsonController.PokemonByID(74); //geodude
+        nuevo = JsonController.PokemonByID(74);//geodude
+        brok.addPokemon(nuevo);
         this.gyms.get(0).addTrainer(brok);
         //gym ciudad celeste
         gyms.add(new Gym("ciudad celeste"));
@@ -40,12 +41,24 @@ public class Championship {
         surge.addPokemon(JsonController.PokemonByID(100));
         this.gyms.get(2).addTrainer(surge);
     }
-
     public ArrayList getGyms(){
         ArrayList<Gym> copyGyms = new ArrayList<>(gyms.size());
         copyGyms.addAll(gyms);
         return copyGyms;
     }
+    public Gym getGymById(int id){
+        return gyms.get(id);
+    }
+    public Gym getGymByName(String name){
+        Gym rta = null;
+        for( Gym data: gyms){
+            if(data.getName().equals(name)){
+                rta = data;
+            }
+        }
+        return rta;
+    }
+
 
 
 

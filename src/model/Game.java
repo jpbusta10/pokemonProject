@@ -55,7 +55,7 @@ public class Game {
     }
 
     /**
-     * depending of the biome it returns a ramdom pokemon with respective types
+     * depending on the biome it returns a ramdom pokemon with respective types
      *
      * @param mybiome
      * @return Pokemon
@@ -80,6 +80,9 @@ public class Game {
     public Trainer getActual() {
         return actual;
     }
+    public User getMyUser(){
+        return this.myUser;
+    }
 
     public boolean addPokemonUser(Pokemon newPokemon) {
         boolean rta = this.myUser.addPokemon(newPokemon);
@@ -93,8 +96,10 @@ public class Game {
     public ArrayList getNotFinishedGyms() {
         ArrayList<Gym> gyms = myChampionship.getGyms();
         ArrayList<Gym> notPassed = new ArrayList<>();
-        for (int i = 0; i < gyms.size() && !gyms.get(i).isPassed(); i++) {
-            notPassed.add(gyms.get(i));
+        for(Gym data: gyms){
+            if(!data.isPassed()){
+                notPassed.add(data);
+            }
         }
         return notPassed;
     }
@@ -107,6 +112,28 @@ public class Game {
             }
         }
         return rta;
+    }
+    public Trainer getCurrentTrainer(){
+        return getToDoGym().getTrainer();
+    }
+    public ArrayList<Pokemon> getMyPokemons(){
+        ArrayList<Pokemon> pokemons = myUser.getSquad();
+        return pokemons;
+    }
+    public Pokemon chooceRandomPokemon(Trainer myTrainer){
+        return myTrainer.getRandomAlivePokemon();
+    }
+    public Pokemon getUserPokemon(int id){
+        return myUser.getPokemon(id);
+    }
+    public Gym getGymByName(String name){
+      return myChampionship.getGymByName(name);
+    }
+    public void resetUser(){
+        for(int i=0; i<myUser.getSquadSize();i++){
+            myUser.getPokemon(i).setAlive(true);
+            myUser.getPokemon(i).setCurrentLife(myUser.getPokemon(i).getMaxLife());
+        }
     }
 
     public ArrayList<Pokemon> getMyPokemons(){

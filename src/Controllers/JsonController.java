@@ -37,6 +37,7 @@ public class JsonController {
         Pokemon nuevo= new Pokemon();
         nuevo.setName(poki.getString("name"));
         nuevo.setLevel(poki.getInt("level"));
+        nuevo.setCurrentLife(100);
         nuevo.setId(poki.getInt("id"));
         nuevo.setMaxLife(30);
         nuevo.setCurrentLife(nuevo.getMaxLife());
