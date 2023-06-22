@@ -39,6 +39,11 @@ public class Character {
         return response;
     }
 
+    public Pokemon removePokemon(int indexRemove)
+    {
+        return squad.remove(indexRemove);
+    }
+
     public void swapPokemon (int posX, int posY)
     {
         Pokemon aux = squad.get(posX); //Guardo pokemon de la posicion que voy a cambiar

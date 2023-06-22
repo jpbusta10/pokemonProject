@@ -13,7 +13,7 @@ public class Main {
     static Scanner keyboard;
 
     public static void main(String[] args) {
-        initialMenu();
+    initialMenu();
 
     }
 
@@ -184,7 +184,7 @@ public class Main {
                     menuSwap(indexOfPokemon);
                     break;
                 case 3:
-
+                    menuSwitch(indexOfPokemon);
                     break;
                 case 9:
                     System.out.println("Saliendo");
@@ -213,7 +213,7 @@ public class Main {
         FrontController.getSquad();
     }
 
-    static void menuSwapStorage (int indexOfPokemon)
+    static void menuSwitch (int indexOfPokemon)
     {
         int swap = 0;
         keyboard = new Scanner(System.in);
@@ -226,6 +226,8 @@ public class Main {
             System.out.println("La posicion debe estar dentro del rango disponible");
             swap = keyboard.nextInt();
         }while (swap < 1 || swap > FrontController.storageSize());
-
+        FrontController.switchPokemon(swap-1, indexOfPokemon);
+        System.out.println("El equipo quedo de la siguiente manera");
+        FrontController.getSquad();
     }
 }

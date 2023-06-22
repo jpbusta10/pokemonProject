@@ -103,9 +103,9 @@ public class Game {
         return myUser.getStorageSize();
     }
 
-    public void switchPokemon (int indexToSquad, int indexToStorage)
+    public void switchPokemon (int indexFromStorage, int indexFromSquad)
     {
-        myUser.
-        myUser.switchPokemon(toSquad, toStorage);
+        ArrayList<Pokemon> storagedPokemons = myUser.storageToArray();
+        myUser.switchPokemon(storagedPokemons.get(indexFromStorage), indexFromSquad);
     }
 }

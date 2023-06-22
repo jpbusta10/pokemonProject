@@ -39,21 +39,19 @@ public class User extends Character {
     {
         boolean response = false;
         if(remove!=null){
-            response = this.pokemonStorage.remove(remove.getId(),remove);
+            response = pokemonStorage.remove(remove.getId(),remove);
         }else {
             throw new NullPointerException("el pokemon no existe");
         }
         return response;
     }
 
-    public void switchPokemon (Pokemon toSquad, Pokemon toStorage) //toSquad es el pokemon que va del almacenamiento al squad y toStorage es el pokemon que va del squad al storage
+    public void switchPokemon (Pokemon fromStorage, int indexFromSquad) //toSquad es el pokemon que va del almacenamiento al squad y toStorage es el pokemon que va del squad al storage
     {
-        if (super.removePokemon(toStorage))
-        {
-            addPokemonToStorage(toStorage);
-            removePokemonFromStorage(toSquad);
-            super.addPokemon(toSquad);
-        }
+        Pokemon fromSquad = super.removePokemon(indexFromSquad);
+        addPokemonToStorage(fromSquad);
+        removePokemonFromStorage(fromStorage);
+        super.addPokemon(fromStorage);
     }
 
     public void storageView ()

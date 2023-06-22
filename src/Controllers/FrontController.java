@@ -75,9 +75,9 @@ public class FrontController {
         return myGame.storageSize();
     }
 
-    public static void switchPokemon (int indexToSquad, int indexToStorage)
+    public static void switchPokemon (int indexFromStorage, int indexFromSquad)
     {
-        myGame.switchPokemon(indexToSquad, indexToStorage);
+        myGame.switchPokemon(indexFromStorage, indexFromSquad);
     }
 
 }
