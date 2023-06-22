@@ -62,7 +62,7 @@ public class FrontController {
     }
 
     public static String safeUserPokemonReturn(int opcion) {
-        return myGame.getMyUser().getPokemonFromSquad(opcion).toString();
+        return myGame.getMyUser().getPokemonFromSquad(opcion).getName();
     }
 
     public static String safePokemonAbiliti(int opcion, int habilidad) {
@@ -74,7 +74,7 @@ public class FrontController {
     }
 
     public static String getPokemonSalvaje() {
-        return myGame.getActual().getSquad().toString();
+        return myGame.getActual().getPokemonFromSquad(0).getName();
     }
 
     /**
@@ -110,9 +110,9 @@ public class FrontController {
     public static String logicaPeleaExploration(int opcion, int habilidad) {
         String aux = "";
         if (Pokemon.peleaPokemon(myGame.getMyUser().getPokemonFromSquad(opcion).getHabilidad(habilidad).getDamage(), myGame.getActual().getPokemonFromSquad(0)) > 0) {
-            return "vida restante de " + myGame.getActual().getPokemonFromSquad(0).toString()+": "+myGame.getActual().getPokemonFromSquad(0).getCurrentLife();
+            return "vida restante de " + myGame.getActual().getPokemonFromSquad(0).getName()+": "+myGame.getActual().getPokemonFromSquad(0).getCurrentLife();
         } else {
-            return "El pokemon " + myGame.getActual().getPokemonFromSquad(0).toString() + " no sobrevivio";
+            return "El pokemon " + myGame.getActual().getPokemonFromSquad(0).getName() + " no sobrevivio";
         }
     }
 
@@ -144,15 +144,15 @@ public class FrontController {
     /**
      * Method that attacks from the rival to your current Pokemon;
      * Receives an option from the user.
-     * @param int opcion.
+     * @param=  int opcion;
      * @return String;
      */
     public static String logicaPeleaExplorationInversa(int opcion){
         String aux="";
         if(Pokemon.peleaPokemon(myGame.getActual().getPokemonFromSquad(0).getHabilidad(0).getDamage(),myGame.getMyUser().getPokemonFromSquad(opcion))>0) {
-            return "vida restante de " + myGame.getMyUser().getPokemonFromSquad(0).toString()+": "+myGame.getMyUser().getPokemonFromSquad(0).getCurrentLife();
+            return "vida restante de " + myGame.getMyUser().getPokemonFromSquad(0).getName()+": "+myGame.getMyUser().getPokemonFromSquad(0).getCurrentLife();
         }else {
-            return "El pokemon "+myGame.getMyUser().getPokemonFromSquad(opcion).toString()+" no sobrevivio";
+            return "El pokemon "+myGame.getMyUser().getPokemonFromSquad(opcion).getName()+" no sobrevivio";
         }
     }
 
@@ -163,7 +163,7 @@ public class FrontController {
 
     /**
      * Generates a StringBuilder from a clone of the Ability Arraylist and separates them with an id.
-     * @param int opcion
+     * @param= int opcion;
      * @return
      */
     public static String getPokemonAbilities(int opcion) {

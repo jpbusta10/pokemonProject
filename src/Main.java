@@ -151,11 +151,10 @@ public class Main {
             System.out.println("\n");
         }
         while(continuar==true) {
-            System.out.println("||||||||||||||||||||||||||||||||||||||\n");
+            System.out.println("||||||||||||||||||||||||||||||||||||||");
             System.out.println("Que bioma deseas explorar?");
             System.out.println("||||||||||||||||||||||||||||||||||||||");
             System.out.println("OPCIONES:");
-            System.out.println("\n");
             System.out.println("1: VOLCAN");
             System.out.println("2: PLAYA");
             System.out.println("3: MONTANA");

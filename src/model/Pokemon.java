@@ -135,7 +135,7 @@ public class Pokemon {
 
     @Override
     public String toString() {
-        return  name + '\n' +
+        return  name +
                 "nivel=" + level;
     }
     public static int escaladodmg(int dato) {
