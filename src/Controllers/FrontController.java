@@ -25,7 +25,6 @@ public class FrontController {
     public static boolean addPokemonToUserByid(int id){
         boolean rta = false;
         Pokemon newPokemon = JsonController.PokemonByID(id);
-        newPokemon.getAbilitieById(0).setDamage(10);
         rta = myGame.addPokemonUser(newPokemon);
         return rta;
     }
