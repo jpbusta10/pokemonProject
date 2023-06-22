@@ -4,6 +4,7 @@ import model.Ability;
 import model.Pokemon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Character {
@@ -47,10 +48,36 @@ public class Character {
         return (ArrayList<Pokemon>) this.squad.clone();
     }
 
-    public Pokemon getRandomPokemon() {  ///returns a random pokemom from squad
-        int random = (int) (Math.random() *squad.size());
-        return squad.get(random);
+    /**
+     * gets a random alive pokemon from squad, if it doesn`t exist returns null
+     * @return Pokemon or null
+     */
+    public Pokemon getRandomAlivePokemon() {
+        List<Pokemon> alivePokemon = new ArrayList<>();
+
+        for (Pokemon pokemon : squad) {
+            if (pokemon.isAlive()) {
+                alivePokemon.add(pokemon);
+            }
+        }
+
+        if (alivePokemon.isEmpty()) {
+            return null; // No alive Pokémon found
+        }
+
+        int randomIndex = (int) (Math.random() * alivePokemon.size());
+        return alivePokemon.get(randomIndex);
     }
+    public boolean checkIfAlivePokemons(){
+        for(Pokemon data: squad){
+            if(data.isAlive()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public Pokemon getPokemonbyName(String name){
         Pokemon rta = null;
         for(Pokemon data: squad){

@@ -22,7 +22,8 @@ public class Championship {
         Pokemon nuevo = new Pokemon();
         nuevo = JsonController.PokemonByID(95); //onix
         brok.addPokemon(nuevo);
-        nuevo = JsonController.PokemonByID(74); //geodude
+        nuevo = JsonController.PokemonByID(74);//geodude
+        brok.addPokemon(nuevo);
         this.gyms.get(0).addTrainer(brok);
         //gym ciudad celeste
         gyms.add(new Gym("ciudad celeste"));

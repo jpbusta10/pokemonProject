@@ -157,6 +157,9 @@ public class Pokemon {
         }
         pokemon.setCurrentLife(pokemon.getMaxLife());
     }
+    public Ability getAbilitieById(int id){
+        return habilidades.get(id);
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -192,6 +195,8 @@ public class Pokemon {
                 ", id=" + id +
                 ", nivel=" + level +
                 ", id_evolution=" + idEvolution +
+                ", currentLife=" + currentLife +
+                ", isAlive="+isAlive+
                 '}';
     }
 }

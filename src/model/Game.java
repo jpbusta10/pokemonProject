@@ -30,7 +30,7 @@ public class Game {
     }
 
     /**
-     * depending of the biome it returns a ramdom pokemon with respective types
+     * depending on the biome it returns a ramdom pokemon with respective types
      *
      * @param mybiome
      * @return Pokemon
@@ -45,6 +45,9 @@ public class Game {
         idPokemon++;
         return nuevo;
     }
+    public User getMyUser(){
+        return this.myUser;
+    }
 
     public boolean addPokemonUser(Pokemon newPokemon) {
         boolean rta = this.myUser.addPokemon(newPokemon);
@@ -58,8 +61,10 @@ public class Game {
     public ArrayList getNotFinishedGyms() {
         ArrayList<Gym> gyms = myChampionship.getGyms();
         ArrayList<Gym> notPassed = new ArrayList<>();
-        for (int i = 0; i < gyms.size() && !gyms.get(i).isPassed(); i++) {
-            notPassed.add(gyms.get(i));
+        for(Gym data: gyms){
+            if(!data.isPassed()){
+                notPassed.add(data);
+            }
         }
         return notPassed;
     }
@@ -81,7 +86,7 @@ public class Game {
         return pokemons;
     }
     public Pokemon chooceRandomPokemon(Trainer myTrainer){
-        return myTrainer.getRandomPokemon();
+        return myTrainer.getRandomAlivePokemon();
     }
     public Pokemon getUserPokemon(int id){
         return myUser.getPokemon(id);
