@@ -9,6 +9,7 @@ import Controllers.JsonController;
 import model.biomes.Gym;
 import model.character.Character;
 import model.character.User;
+import scala.util.parsing.combinator.testing.Str;
 
 public class Game {
     Biome forest = Biome.FOREST;
@@ -73,9 +74,9 @@ public class Game {
         return rta;
     }
 
-    public void getSquad ()
+    public String getSquad ()
     {
-        myUser.squadView();
+        return myUser.squadView();
     }
 
     public int getSquadSize ()
@@ -93,9 +94,9 @@ public class Game {
         return myUser.pokemonData(indexOfPokemon);
     }
 
-    public void storageView ()
+    public String storageView ()
     {
-        myUser.storageView();
+        return myUser.storageView();
     }
 
     public int storageSize ()
@@ -107,5 +108,20 @@ public class Game {
     {
         ArrayList<Pokemon> storagedPokemons = myUser.storageToArray();
         myUser.switchPokemon(storagedPokemons.get(indexFromStorage), indexFromSquad);
+    }
+
+    public void addPokemonToStorage (int indexToStorage)
+    {
+        if (myUser.getSquadSize() == 1)
+        {
+            System.out.println("Solo tienes un pokemon en el equipo, no lo puedes almacenar");
+        }
+        else
+        {
+            Pokemon aux = myUser.removePokemon(indexToStorage);
+            myUser.addPokemonToStorage(aux);
+            System.out.println("El equipo quedo de la siguiente manera");
+            myUser.squadView();
+        }
     }
 }

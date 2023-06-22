@@ -45,9 +45,9 @@ public class FrontController {
         return gym.getName();
     }
 
-    public static void getSquad()
+    public static String getSquad()
     {
-        myGame.getSquad();
+        return myGame.getSquad();
     }
 
     public static String getPokemonData(int indexOfPokemon)
@@ -65,9 +65,9 @@ public class FrontController {
         myGame.swapPokemon(posX, posY);
     }
 
-    public static void storageView ()
+    public static String storageView ()
     {
-        myGame.storageView();
+        return myGame.storageView();
     }
 
     public static int storageSize ()
@@ -78,6 +78,11 @@ public class FrontController {
     public static void switchPokemon (int indexFromStorage, int indexFromSquad)
     {
         myGame.switchPokemon(indexFromStorage, indexFromSquad);
+    }
+
+    public static void addPokemonToStorage (int indexToStorage)
+    {
+        myGame.addPokemonToStorage(indexToStorage);
     }
 
 }

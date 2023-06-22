@@ -51,16 +51,18 @@ public class User extends Character {
         Pokemon fromSquad = super.removePokemon(indexFromSquad);
         addPokemonToStorage(fromSquad);
         removePokemonFromStorage(fromStorage);
-        super.addPokemon(fromStorage);
+        super.addPokemon(indexFromSquad, fromStorage);
     }
 
-    public void storageView ()
+    public String storageView ()
     {
         ArrayList <Pokemon> storagedPokemons = storageToArray();
-        for (Pokemon aux :
-                storagedPokemons) {
-            System.out.println(storagedPokemons.indexOf(aux)+1 + ") " + aux.toString());
+        StringBuilder sb = new StringBuilder();
+        for (Pokemon data : storagedPokemons) {
+            sb.append(storagedPokemons.indexOf(data)+1 + ". " + data.getName());
+            sb.append("\n");
         }
+        return sb.toString();
     }
 
     public ArrayList storageToArray ()

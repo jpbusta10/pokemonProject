@@ -132,6 +132,38 @@ public class Pokemon {
         habilidades.add(habilidad);
     }
 
+    public String getPokemonData ()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getName() + '\n');
+        sb.append(" Nivel: " + getLevel() + '\n');
+        sb.append(" Tipos: " + '\n');
+        sb.append(getTipos());
+        sb.append(" Habilidades: " + '\n');
+        sb.append(getHabilidades());
+        return sb.toString();
+    }
+
+    public String getTipos ()
+    {
+        StringBuilder sb = new StringBuilder();
+        for (String data : tipos)
+        {
+            sb.append("     " + data + '\n');
+        }
+        return sb.toString();
+    }
+
+    public String getHabilidades ()
+    {
+        StringBuilder sb = new StringBuilder();
+        for (Ability data : habilidades)
+        {
+            sb.append("     " + data.getName() + '\n');
+            sb.append("         Dano: " + data.getDamage() + '\n');
+        }
+        return sb.toString();
+    }
     @Override
     public String toString() {
         return "Pokemon{" +

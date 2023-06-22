@@ -1,6 +1,7 @@
 package model.character;
 
 import model.Pokemon;
+import model.biomes.Gym;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,11 @@ public class Character {
         return rta;
     }
 
+    public void addPokemon(int index, Pokemon newPokemon)
+    {
+        squad.add(index, newPokemon);
+    }
+
     public boolean removePokemon(Pokemon remove)
     {
         boolean response = false;
@@ -46,24 +52,36 @@ public class Character {
 
     public void swapPokemon (int posX, int posY)
     {
-        Pokemon aux = squad.get(posX); //Guardo pokemon de la posicion que voy a cambiar
-        squad.remove(posX); //Elimino el pokemon de esa posicion, todos restan una posicion
-        squad.add(posX, squad.get(posY - 1)); //Agrego el pokemon que queria cambiar en el lugar del que elimine. (posY - 1 porque todos se restaron un lugar)
-        squad.remove(posY); //Elimino el pokemon que cambie
-        squad.add(posY, aux); //Finalmente agrego el pokemon que guardamos en la variable aux
+        if (posX < posY)
+        {
+            Pokemon aux = squad.remove(posX);//Guardo pokemon de la posicion que voy a cambiar y lo elimino
+            squad.add(posX, squad.get(posY-1)); //Agrego el pokemon que queria cambiar en el lugar del que elimine. (posY - 1 porque todos se restaron un lugar)
+            squad.remove(posY); //Elimino el pokemon que cambie
+            squad.add(posY, aux); //Finalmente agrego el pokemon que guardamos en la variable aux
+        }
+        else
+        {
+            Pokemon aux = squad.remove(posX);//Guardo pokemon de la posicion que voy a cambiar y lo elimino
+            squad.add(posX, squad.get(posY)); //Agrego el pokemon que queria cambiar en el lugar del que elimine. (posY - 1 porque todos se restaron un lugar)
+            squad.remove(posY); //Elimino el pokemon que cambie
+            squad.add(posY, aux); //Finalmente agrego el pokemon que guardamos en la variable aux
+        }
+
     }
 
-    public void squadView ()
+    public String squadView ()
     {
-        for (Pokemon aux :
-                squad) {
-            System.out.println(squad.indexOf(aux)+1 + ") " + aux.toString());
+        StringBuilder sb = new StringBuilder();
+        for (Pokemon data : squad) {
+            sb.append(squad.indexOf(data)+1 + ". " + data.getName());
+            sb.append("\n");
         }
+        return sb.toString();
     }
 
     public String pokemonData (int indexOfPokemon)
     {
-        return squad.get(indexOfPokemon).toString();
+        return squad.get(indexOfPokemon).getPokemonData();
     }
 
     @Override
