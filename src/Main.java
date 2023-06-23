@@ -405,7 +405,7 @@ public class Main {
                         System.out.println(FrontController.getMyPokemons());
                         System.out.println("PRECIONA EL NUMERO AL LADO DEL POKEMON PARA ELEGIRLO");
                         opcion = keyboard.nextInt();
-                        if(opcion<0||FrontController.getSquadSize()<opcion){
+                        if(opcion<0||FrontController.getActualSquadSize()<opcion){
                             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                             System.out.println("El numero ingresado es invalido");
                         }else{
@@ -417,7 +417,7 @@ public class Main {
                         System.out.println("\n");
                     }
                     while (FrontController.chequeadorDeVidaRival() == true && FrontController.chequeadorDeVidaPropia(opcion) == true) {
-                        System.out.println(FrontController.safeUserPokemonNameReturn(opcion));
+                        System.out.println(FrontController.safeUserPokemonReturn(opcion));
                         System.out.println(FrontController.mostrarVidaPokemonUser(opcion));
                         boolean auxiliar=false;
                         while(auxiliar==false){
@@ -555,10 +555,13 @@ public class Main {
             switch (option)
             {
                 case 1:
-                    FrontController.getPokemonDataStorage(indexPokemon);
+                    System.out.println(FrontController.getPokemonDataStorage(indexPokemon));;
                     break;
                 case 2:
                     FrontController.addPokemonToSquad(indexPokemon);
+                    System.out.println("El squad quedo de la siguiente manera");
+                    System.out.println(FrontController.getSquad());
+                    option = 9;
                     break;
                 case 9:
                     System.out.println("Saliendo");

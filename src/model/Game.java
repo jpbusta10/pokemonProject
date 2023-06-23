@@ -194,7 +194,7 @@ public class Game implements Serializable {
             Pokemon aux = myUser.removePokemon(indexToStorage);
             myUser.addPokemonToStorage(aux);
             System.out.println("El equipo quedo de la siguiente manera");
-            myUser.squadView();
+            System.out.println(myUser.squadView());
         }
     }
 
@@ -206,5 +206,10 @@ public class Game implements Serializable {
     public int squadSize ()
     {
         return myUser.getSquadSize();
+    }
+
+    public void removeFromStorage (Pokemon remove)
+    {
+        myUser.removePokemonFromStorage(remove);
     }
 }

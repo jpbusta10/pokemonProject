@@ -180,7 +180,7 @@ public class FrontController {
 
     public static String catchPokemon(){
         String mensaje="";
-        if(myGame.getMyUser().getActualSquadSize()!=myGame.getSquadSize()){
+        if(myGame.getMyUser().getActualSquadSize()!=myGame.squadSize()){
             myGame.getMyUser().addPokemon(myGame.getActual().getPokemonFromSquad(0));
             mensaje="El pokemon "+myGame.getActual().getPokemonFromSquad(0).getName()+" ha sido capturado con exito";
         }else{
@@ -323,10 +323,6 @@ public class FrontController {
     {
         return myGame.storageSize();
     }
-    public static void addPokemonToStorage (int indexToStorage)
-    {
-        myGame.addPokemonToStorage(indexToStorage);
-    }
 
     /**
      * checks if it has alive pokemons
@@ -351,10 +347,6 @@ public class FrontController {
     public static String mostrarVidaPokemonRival(){
         return "vida restante: "+myGame.getActual().getPokemonFromSquad(0).getCurrentLife();
 
-    }
-    public static void switchPokemon (int indexFromStorage, int indexFromSquad)
-    {
-        myGame.switchPokemon(indexFromStorage, indexFromSquad);
     }
 
     public static String mostrarNivelPokemonRival(){
@@ -397,6 +389,7 @@ public class FrontController {
             ArrayList<Pokemon> storagePokemons = myGame.storageToArray();
             Pokemon add = storagePokemons.get(indexPokemon);
             myGame.addPokemonUser(add);
+            myGame.removeFromStorage(add);
         }
     }
 }
