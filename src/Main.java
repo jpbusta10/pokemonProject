@@ -340,14 +340,14 @@ public class Main {
             opcion = keyboard.nextInt();
             FrontController.logicaCazarPokemones(opcion);
             aux=menuPeleaExploration();
-            if(aux==1){
+            if(aux==1) {
                 keyboard.nextLine();
                 keyboard.nextLine();
                 for (int i = 0; i < 4; i++) {
                     System.out.println("\n");
                 }
-                boolean antribreak=false;
-                while (antribreak==false) {
+                boolean antribreak = false;
+                while (antribreak == false) {
                     System.out.println("Que desea hacer:\n");
                     System.out.println("OPCIONES:");
                     System.out.println("\n");
@@ -355,25 +355,26 @@ public class Main {
                     System.out.println("2: Continuar Explorando");
                     System.out.println("3: Salir");
                     opcion = keyboard.nextInt();
-                    if(opcion<1||opcion>3){
+                    if (opcion < 1 || opcion > 3) {
                         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                         System.out.println("El numero ingresado es invalido");
-                    }else{
-                        antribreak=true;
+                    } else {
+                        antribreak = true;
                     }
                 }
-                switch (opcion){
+                switch (opcion) {
                     case 1:
                         System.out.println(FrontController.catchPokemon());
-                        continuar=false;
+                        continuar = false;
                         break;
                     case 2:
                         break;
                     case 3:
-                        continuar=false;
+                        continuar = false;
                         break;
                 }
-            } else if (aux==4) {
+            }
+            else if (aux==4||aux==0) {
                 continuar=false;
             }
         }
@@ -381,6 +382,7 @@ public class Main {
 
 
     static int menuPeleaExploration() {
+        int respuesta=0;
         keyboard = new Scanner(System.in);
         int opcion, habilidad=0;
         System.out.println("presione cualquier tecla para continuar");
@@ -451,11 +453,13 @@ public class Main {
                     System.out.println("|||||||||||||||||||  GANASTE!  |||||||||||||||||||");
                     System.out.println(FrontController.levear(opcion));
                     FrontController.resetUser();
+                    respuesta=1;
                 }else {
                     System.out.println("|||||||||||||||||||  PERDISTE :( |||||||||||||||||||");
+                    respuesta=0;
                 }
         }
-        return 1;
+        return respuesta;
     }
     static void menuSwap (int indexOfPokemon)
     {

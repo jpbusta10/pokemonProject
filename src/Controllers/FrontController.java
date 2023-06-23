@@ -45,14 +45,7 @@ public class FrontController {
         rta = myGame.addPokemonUser(newPokemon);
         return rta;
     }
-    public static String getNotfinishedGyms(){
-        StringBuilder sb = new StringBuilder();
-        ArrayList<Gym> notFinished = myGame.getNotFinishedGyms();
-        for(Gym data: notFinished){
-            sb.append(data);
-        }
-        return sb.toString();
-    }
+
     public static String getFinishedGymsNames(){
 
         StringBuilder sb = new StringBuilder();
@@ -173,7 +166,7 @@ public class FrontController {
         if(Pokemon.peleaPokemon(myGame.getActual().getPokemonFromSquad(0).getHabilidad(0).getDamage(),myGame.getMyUser().getPokemonFromSquad(opcion))>0) {
             return "vida restante de " + myGame.getMyUser().getPokemonFromSquad(0).getName()+": "+myGame.getMyUser().getPokemonFromSquad(0).getCurrentLife();
         }else {
-            myGame.getMyUser().getPokemonFromSquad(opcion).setAlive(false);
+            myGame.getUserPokemon(opcion).setAlive(false);
             return "El pokemon "+myGame.getMyUser().getPokemonFromSquad(opcion).getName()+" no sobrevivio";
         }
     }
