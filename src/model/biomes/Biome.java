@@ -15,11 +15,7 @@ public enum Biome implements Serializable{
         this.pokemonTypes.add(type3);
     }
     public String getTypes(int id){
-        String rta = null;
-        if(id>=0 && id<pokemonTypes.size()-1){
-            rta = pokemonTypes.get(id);
-        }
-        return rta;
+        return pokemonTypes.get(id);
     }
 
 }

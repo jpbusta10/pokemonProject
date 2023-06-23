@@ -31,6 +31,14 @@ public class Game implements Serializable {
         myChampionship = new Championship();
     }
 
+    public int getIdPokemon() {
+        return idPokemon;
+    }
+
+    public void setIdPokemon(int idPokemon) {
+        this.idPokemon = idPokemon;
+    }
+
     public Biome getForest() {
         return forest;
     }
@@ -60,11 +68,11 @@ public class Game implements Serializable {
     public Trainer Exploration(Biome mybiome) {
         JsonController controller = new JsonController();
         Random random = new Random();
-        int numeroAleatorio = random.nextInt(3) + 1;
+        int numeroAleatorio = random.nextInt(3);
         String tipo = mybiome.getTypes(numeroAleatorio);
         Pokemon nuevo = controller.RandomPokemon(tipo);
         Pokemon.Balanceo(nuevo);
-        nuevo.setIdPokedex(idPokemon + 1);
+        nuevo.setId(idPokemon + 1);
         idPokemon++;
         Trainer trainer = new Trainer("Wild "+ nuevo.getName());
         trainer.addPokemon(nuevo);

@@ -22,12 +22,9 @@ public class Character implements Serializable {
     public String getName() {
         return name;
     }
-
-    public int getActualSquadSize()
-    {
+    public int getActualSquadSize() {
         return squad.size();
     }
-
     public boolean addPokemon(Pokemon newPokemon) {
 
         boolean rta = squad.add(newPokemon);
