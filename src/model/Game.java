@@ -92,7 +92,7 @@ public class Game implements Serializable {
     }
 
     public boolean addPokemonUser(Pokemon newPokemon) {
-        boolean rta = this.myUser.addPokemon(newPokemon);
+        boolean rta = myUser.addPokemon(newPokemon);
         return rta;
     }
 
@@ -152,14 +152,19 @@ public class Game implements Serializable {
         return myUser.squadView();
     }
 
+    public int getActualSquadSize ()
+    {
+        return myUser.getActualSquadSize();
+    }
+
     public void swapPokemon (int posX, int posY)
     {
         myUser.swapPokemon(posX, posY);
     }
 
-    public String getPokemonData (int indexOfPokemon)
+    public String getPokemonData(Pokemon data)
     {
-        return myUser.pokemonData(indexOfPokemon);
+        return myUser.pokemonData(data);
     }
 
     public String storageView ()
@@ -189,10 +194,22 @@ public class Game implements Serializable {
             Pokemon aux = myUser.removePokemon(indexToStorage);
             myUser.addPokemonToStorage(aux);
             System.out.println("El equipo quedo de la siguiente manera");
-            myUser.squadView();
+            System.out.println(myUser.squadView());
         }
     }
-    public int getSquadSize () {
+
+    public ArrayList storageToArray ()
+    {
+        return myUser.storageToArray();
+    }
+
+    public int squadSize ()
+    {
         return myUser.getSquadSize();
+    }
+
+    public void removeFromStorage (Pokemon remove)
+    {
+        myUser.removePokemonFromStorage(remove);
     }
 }

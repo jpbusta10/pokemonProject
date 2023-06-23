@@ -136,9 +136,9 @@ public class Character implements Serializable {
         return sb.toString();
     }
 
-    public String pokemonData (int indexOfPokemon)
+    public String pokemonData (Pokemon data)
     {
-        return squad.get(indexOfPokemon).getPokemonData();
+        return data.getPokemonData();
     }
 
     @Override
