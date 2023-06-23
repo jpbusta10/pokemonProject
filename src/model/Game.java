@@ -11,6 +11,7 @@ import model.biomes.Gym;
 import model.character.Character;
 import model.character.Trainer;
 import model.character.User;
+import scala.util.parsing.combinator.testing.Str;
 
 public class Game implements Serializable {
     Biome forest = Biome.FOREST;
@@ -136,6 +137,57 @@ public class Game implements Serializable {
             myUser.getPokemon(i).setAlive(true);
             myUser.getPokemon(i).setCurrentLife(myUser.getPokemon(i).getMaxLife());
             System.out.println(myUser.getPokemon(i).toString());
+        }
+    }
+
+    public String getSquad ()
+    {
+        return myUser.squadView();
+    }
+
+    public int getSquadSize ()
+    {
+        return myUser.getActualSquadSize();
+    }
+
+    public void swapPokemon (int posX, int posY)
+    {
+        myUser.swapPokemon(posX, posY);
+    }
+
+    public String getPokemonData (int indexOfPokemon)
+    {
+        return myUser.pokemonData(indexOfPokemon);
+    }
+
+    public String storageView ()
+    {
+        return myUser.storageView();
+    }
+
+    public int storageSize ()
+    {
+        return myUser.getStorageSize();
+    }
+
+    public void switchPokemon (int indexFromStorage, int indexFromSquad)
+    {
+        ArrayList<Pokemon> storagedPokemons = myUser.storageToArray();
+        myUser.switchPokemon(storagedPokemons.get(indexFromStorage), indexFromSquad);
+    }
+
+    public void addPokemonToStorage (int indexToStorage)
+    {
+        if (myUser.getSquadSize() == 1)
+        {
+            System.out.println("Solo tienes un pokemon en el equipo, no lo puedes almacenar");
+        }
+        else
+        {
+            Pokemon aux = myUser.removePokemon(indexToStorage);
+            myUser.addPokemonToStorage(aux);
+            System.out.println("El equipo quedo de la siguiente manera");
+            myUser.squadView();
         }
     }
 }

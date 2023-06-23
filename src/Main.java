@@ -3,8 +3,11 @@ import Controllers.FrontController;
 import Controllers.JsonController;
 import model.Pokemon;
 import model.biomes.Biome;
+import model.character.User;
 
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static Controllers.JsonController.RandomPokemon;
@@ -13,7 +16,7 @@ public class Main {
     static Scanner keyboard;
 
     public static void main(String[] args) {
-        initialMenu();
+    initialMenu();
 
     }
 
@@ -45,6 +48,7 @@ public class Main {
         }
         return rta;
     }
+
     static void newGameMenu() {
         boolean rta = true;
         keyboard = new Scanner(System.in);
@@ -83,8 +87,10 @@ public class Main {
         boolean seguir = true;
         while (seguir == true) {
             System.out.println("que desea hacer ahora");
-            System.out.println("1. Cazar pokemon");
-            System.out.println("2. Campeonato");
+            System.out.println("1. cazar pokemon");
+            System.out.println("2. campeonato");
+            System.out.println("3. pokemon");
+            System.out.println("4. ver almacenamiento pokemon");
             System.out.println("5. Guardar partida");
             System.out.println("9. Salir");
             int option = 0;
@@ -95,6 +101,18 @@ public class Main {
                     break;
                 case 2:
                     menuCampeonato();
+                    break;
+                case 3:
+                    menuPokemon();
+                    break;
+                case 4:
+                    if (FrontController.storageSize() == 0)
+                    {
+                        System.out.println("No hay ningun pokemon en el almacenamiento");
+                    }
+                    else {
+                        System.out.println(FrontController.storageView());
+                    }
                     break;
                 case 5:
                    FrontController.saveGame();
@@ -209,7 +227,74 @@ public class Main {
         else System.out.println(res);
     }
 
+    static void menuPokemon (){
+        keyboard = new Scanner(System.in);
+        System.out.println("presione cualquier tecla para continuar");
+        keyboard.nextLine();
+        int option = 0;
+        while(option != 9) {
+            System.out.println("Elija un pokemon para continuar");
+            System.out.println(FrontController.getSquad());
+            System.out.println("9. salir");
+            option = keyboard.nextInt();
+            if(option >= 1 && option <= FrontController.getSquadSize())
+            {
+                menuAcciones(option - 1);
+            }
+            else if (option != 9)
+            {
+                System.out.println("La opcion ingresada no existe.");
+            }
+        }
+    }
 
+    static void menuAcciones (int indexOfPokemon)
+    {
+        keyboard = new Scanner(System.in);
+        System.out.println("presione cualquier tecla para continuar");
+        keyboard.nextLine();
+        int option = 0;
+        while (option != 9)
+        {
+            System.out.println("que desea hacer");
+            System.out.println("1. Ver datos del pokemon");
+            System.out.println("2. Cambiar posicion en el equipo");
+            System.out.println("3. Cambiar con un pokemon del almacenamiento");
+            System.out.println("4. Almacenar pokemon");
+            System.out.println("9. Salir");
+            option = keyboard.nextInt();
+            switch (option)
+            {
+                case 1:
+                    System.out.println(FrontController.getPokemonData(indexOfPokemon));
+                    break;
+                case 2:
+                    menuSwap(indexOfPokemon);
+                    option = 9;
+                    break;
+                case 3:
+                    menuSwitch(indexOfPokemon);
+                    option = 9;
+                    break;
+                case 4:
+                    if (FrontController.getSquadSize() == 1)
+                    {
+                        System.out.println("No puedes almacenar el unico pokemon del equipo");
+                    }
+                    else
+                    {
+                        FrontController.addPokemonToStorage(indexOfPokemon);
+                    }
+                    option = 9;
+                    break;
+                case 9:
+                    System.out.println("Saliendo");
+                    break;
+                default:
+                    System.out.println("Opcion fuera de rango");
+            }
+        }
+    }
 
     /**
      * ataque del usuario al pokemon del trainer
@@ -316,5 +401,69 @@ public class Main {
         }
         System.out.println("|||||||||||||||||||  GANASTE!  |||||||||||||||||||");
 
+    }
+    static void menuSwap (int indexOfPokemon)
+    {
+        int swap = 0;
+        keyboard = new Scanner(System.in);
+        System.out.println("presione cualquier tecla para continuar");
+        keyboard.nextLine();
+        if (FrontController.getSquadSize() == 1)
+        {
+            System.out.println("Solo tienes un pokemon en el equipo");
+        }
+        else {
+            do //Va a repetir mientras que swap no se encuentre entre el rango de opciones y sea igual al indice del pokemon que quiero cambiar
+            {
+                System.out.println("Ingrese la posicion en la que lo quiere ubicar");
+                System.out.println("La posicion debe estar dentro del rango disponible y no puede ser la misma del pokemon que se quiere cambiar");
+                System.out.println(FrontController.getSquad());
+                System.out.println("9. Salir");
+                swap = keyboard.nextInt();
+            } while (((swap < 1 || swap > FrontController.getSquadSize()) || swap == indexOfPokemon + 1) && swap != 9);
+            if (swap != 9)
+            {
+                FrontController.swapPokemon(swap - 1, indexOfPokemon);
+                System.out.println("El equipo quedo de la siguiente manera");
+                System.out.println(FrontController.getSquad());
+            }
+            else
+            {
+                System.out.println("Saliendo");
+            }
+        }
+    }
+
+    static void menuSwitch (int indexOfPokemon)
+    {
+        int swap = 0;
+        keyboard = new Scanner(System.in);
+        System.out.println("presione cualquier tecla para continuar");
+        keyboard.nextLine();
+        if (FrontController.storageSize() == 0)
+        {
+            System.out.println("No hay ningun pokemon en el almacenamiento");
+        }
+        else
+        {
+            do
+            {
+                System.out.println("Ingrese el numero del pokemon a cambiar");
+                System.out.println("La posicion debe estar dentro del rango disponible");
+                System.out.println(FrontController.storageView());
+                System.out.println("9. Salir");
+                swap = keyboard.nextInt();
+            }while ((swap < 1 || swap > FrontController.storageSize()) && swap != 9);
+            if (swap != 9)
+            {
+                FrontController.switchPokemon(swap-1, indexOfPokemon);
+                System.out.println("El equipo quedo de la siguiente manera");
+                System.out.println(FrontController.getSquad());
+            }
+            else
+            {
+                System.out.println("Saliendo");
+            }
+        }
     }
 }

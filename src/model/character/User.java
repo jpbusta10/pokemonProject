@@ -3,8 +3,11 @@ package model.character;
 import model.Pokemon;
 import model.character.Character;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class User extends Character {
     private HashMap<Integer, Pokemon> pokemonStorage; //Se almacena por el id unico.
@@ -36,17 +39,57 @@ public class User extends Character {
     {
         boolean response = false;
         if(remove!=null){
-            this.pokemonStorage.remove(remove.getId(),remove);
-            response=true;
+            response = pokemonStorage.remove(remove.getId(),remove);
         }else {
             throw new NullPointerException("el pokemon no existe");
         }
         return response;
     }
 
-    public void switchPokemon (Pokemon toSquad, Pokemon toStorage) //toSquad es el pokemon que va del almacenamiento al squad y toStorage es el pokemon que va del squad al storage
+    public void switchPokemon (Pokemon fromStorage, int indexFromSquad) //toSquad es el pokemon que va del almacenamiento al squad y toStorage es el pokemon que va del squad al storage
     {
+        Pokemon fromSquad = super.removePokemon(indexFromSquad);
+        addPokemonToStorage(fromSquad);
+        removePokemonFromStorage(fromStorage);
+        super.addPokemon(indexFromSquad, fromStorage);
     }
 
+    public String storageView ()
+    {
+        ArrayList <Pokemon> storagedPokemons = storageToArray();
+        StringBuilder sb = new StringBuilder();
+        for (Pokemon data : storagedPokemons) {
+            sb.append(storagedPokemons.indexOf(data)+1 + ". " + data.getName());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 
+    public ArrayList storageToArray ()
+    {
+        ArrayList<Pokemon> storagedPokemons = new ArrayList<>();
+        Iterator it = pokemonStorage.entrySet().iterator();
+        while (it.hasNext())
+        {
+            Map.Entry me = (Map.Entry) it.next();
+            if (me.getValue() instanceof Pokemon)
+            {
+                Pokemon aux = (Pokemon) me.getValue();
+                storagedPokemons.add(aux);
+            }
+        }
+        return storagedPokemons;
+    }
+
+    public int getStorageSize ()
+    {
+        return pokemonStorage.size();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "pokemonStorage=" + pokemonStorage +
+                '}';
+    }
 }

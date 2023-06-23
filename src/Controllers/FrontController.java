@@ -269,6 +269,15 @@ public class FrontController {
         }
         return response;
     }
+    public static String getSquad()
+    {
+        return myGame.getSquad();
+    }
+
+    public static String getPokemonData(int indexOfPokemon)
+    {
+        return myGame.getPokemonData(indexOfPokemon);
+    }
 
     /**
      * checks if the trainer has alive pokemons
@@ -278,6 +287,26 @@ public class FrontController {
         Trainer myTrainer = myGame.getCurrentTrainer();
         return  myTrainer.checkIfAlivePokemons();
     }
+    public static int getSquadSize ()
+    {
+        return myGame.getSquadSize();
+    }
+
+    public static void swapPokemon (int posX, int posY)
+    {
+        myGame.swapPokemon(posX, posY);
+    }
+
+    public static String storageView ()
+    {
+        return myGame.storageView();
+    }
+
+    public static int storageSize ()
+    {
+        return myGame.storageSize();
+    }
+
 
     /**
      * checks if it has alive pokemons
@@ -298,6 +327,15 @@ public class FrontController {
     }
     public static void saveGame(){
         FileController.saveGame(myGame);
+    }
+    public static void switchPokemon (int indexFromStorage, int indexFromSquad)
+    {
+        myGame.switchPokemon(indexFromStorage, indexFromSquad);
+    }
+
+    public static void addPokemonToStorage (int indexToStorage)
+    {
+        myGame.addPokemonToStorage(indexToStorage);
     }
 
 }
