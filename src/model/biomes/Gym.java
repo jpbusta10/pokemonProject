@@ -2,9 +2,10 @@ package model.biomes;
 
 import model.character.Trainer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Gym {
+public class Gym implements Serializable{
     private String name;
     private ArrayList<Trainer> trainers;
     private int level;

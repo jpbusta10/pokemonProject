@@ -3,11 +3,12 @@ package model.character;
 import model.Ability;
 import model.Pokemon;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Character {
+public class Character implements Serializable {
     private String name;
     private ArrayList<Pokemon> squad;
     private int squadSize = 3;
@@ -44,6 +45,10 @@ public class Character {
         return squadSize;
     }
 
+    /**
+     * returns a copy of the squad
+     * @return ArrayList
+     */
     public ArrayList<Pokemon> getSquad() {
         return (ArrayList<Pokemon>) this.squad.clone();
     }

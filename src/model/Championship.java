@@ -5,9 +5,10 @@ import model.biomes.Gym;
 import model.character.Character;
 import model.character.Trainer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Championship {
+public class Championship implements Serializable {
 
     private ArrayList<Gym> gyms;
 
