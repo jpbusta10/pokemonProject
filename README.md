@@ -45,6 +45,7 @@ Si ganas la batalla tenes la opcion de capturar el pokemon.
 Aqui hay distintos gimnacios para pelear y estan en orden.
 Para pasar al gimnacio siguiente debes vencer los anteriores.
 
+## 
 
 
 
