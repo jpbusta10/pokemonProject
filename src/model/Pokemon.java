@@ -160,6 +160,7 @@ public class Pokemon implements Serializable{
                 pokemon.habilidades.get(j).setDamage(escaladodmg(pokemon.habilidades.get(j).getDamage()));
             }
             pokemon.setMaxLife(escaladovida(pokemon.getMaxLife()));
+            System.out.println("Nivel: "+i+" dano: "+pokemon.habilidades.get(0).getDamage()+" vida: "+pokemon.getMaxLife());
         }
         pokemon.setCurrentLife(pokemon.getMaxLife());
     }
