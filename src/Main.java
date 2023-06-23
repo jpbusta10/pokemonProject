@@ -24,6 +24,7 @@ public class Main {
         keyboard = new Scanner(System.in);
         int option = 0;
         boolean rta = true;
+        boolean checkArchivo = false;
         System.out.println("1.nuevo juego");
         System.out.println("2.cargar juego");
         System.out.println("9.salir");
@@ -33,7 +34,13 @@ public class Main {
                 newGameMenu();
                 break;
             case 2:
-                //carga juego
+                checkArchivo = FrontController.loadGame();
+                if(checkArchivo) {
+                    menuJuego();
+                }
+                else{
+                    System.out.println("no hay archivo");
+                }
                 break;
             case 9:
                 rta = false;
@@ -72,10 +79,7 @@ public class Main {
         }
         System.out.println("felicidades ya tiene su Pokemon");
         menuJuego();
-
-
     }
-
     static void menuJuego() {
         keyboard = new Scanner(System.in);
         System.out.println("presione caulquier tecla para continuar");
@@ -87,7 +91,8 @@ public class Main {
             System.out.println("2. campeonato");
             System.out.println("3. pokemon");
             System.out.println("4. ver almacenamiento pokemon");
-            System.out.println("9. salir");
+            System.out.println("5. Guardar partida");
+            System.out.println("9. Salir");
             int option = 0;
             option = keyboard.nextInt();
             switch (option) {
@@ -109,16 +114,15 @@ public class Main {
                         System.out.println(FrontController.storageView());
                     }
                     break;
+                case 5:
+                   FrontController.saveGame();
                 case 9:
                     seguir = false;
                     initialMenu();
                     break;
-
             }
         }
-
     }
-
     static void menuCampeonato() {
         keyboard = new Scanner(System.in);
         System.out.println("presione cualquier tecla para continuar");
@@ -144,10 +148,7 @@ public class Main {
                     seguir = false;
                     break;
             }
-
-
         }
-
     }
     static void gimnacio() {
         keyboard = new Scanner(System.in);
