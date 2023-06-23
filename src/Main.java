@@ -276,7 +276,14 @@ public class Main {
                     option = 9;
                     break;
                 case 4:
-                    FrontController.addPokemonToStorage(indexOfPokemon);
+                    if (FrontController.getSquadSize() == 1)
+                    {
+                        System.out.println("No puedes almacenar el unico pokemon del equipo");
+                    }
+                    else
+                    {
+                        FrontController.addPokemonToStorage(indexOfPokemon);
+                    }
                     option = 9;
                     break;
                 case 9:

@@ -141,7 +141,7 @@ public class Game {
 
     public int getSquadSize ()
     {
-        return myUser.getSquadSize();
+        return myUser.getActualSquadSize();
     }
 
     public void swapPokemon (int posX, int posY)

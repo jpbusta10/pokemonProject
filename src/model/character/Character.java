@@ -22,7 +22,7 @@ public class Character {
         return name;
     }
 
-    public int getSquadSize()
+    public int getActualSquadSize()
     {
         return squad.size();
     }

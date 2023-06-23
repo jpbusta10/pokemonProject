@@ -199,7 +199,7 @@ public class Pokemon {
         sb.append(" Tipos: " + '\n');
         sb.append(getTipos());
         sb.append(" Habilidades: " + '\n');
-        sb.append(getHabilidades());
+        sb.append(getStringHabilidades());
         return sb.toString();
     }
 
@@ -213,7 +213,7 @@ public class Pokemon {
         return sb.toString();
     }
 
-    public String getHabilidades ()
+    public String getStringHabilidades ()
     {
         StringBuilder sb = new StringBuilder();
         for (Ability data : habilidades)
