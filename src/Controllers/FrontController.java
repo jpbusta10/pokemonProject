@@ -175,7 +175,7 @@ public class FrontController {
         }
     }
 
-    public static String catchpokemon(){
+    public static String catchPokemon(){
         myGame.getMyUser().addPokemonToStorage(myGame.getActual().getPokemonFromSquad(0));
         return "El poquemon ha sido capturado con exito";
     }
@@ -276,7 +276,14 @@ public class FrontController {
 
     public static String getPokemonData(int indexOfPokemon)
     {
-        return myGame.getPokemonData(indexOfPokemon);
+        return myGame.getPokemonData(myGame.getMyPokemons().get(indexOfPokemon));
+    }
+
+    public static String getPokemonDataStorage(int indexOfPokemon)
+    {
+        ArrayList<Pokemon> storagedPokemons = myGame.storageToArray();
+        Pokemon data = storagedPokemons.get(indexOfPokemon);
+        return myGame.getPokemonData(data);
     }
 
     /**
@@ -287,9 +294,9 @@ public class FrontController {
         Trainer myTrainer = myGame.getCurrentTrainer();
         return  myTrainer.checkIfAlivePokemons();
     }
-    public static int getSquadSize ()
+    public static int getActualSquadSize ()
     {
-        return myGame.getSquadSize();
+        return myGame.getActualSquadSize();
     }
 
     public static void swapPokemon (int posX, int posY)
@@ -338,4 +345,21 @@ public class FrontController {
         myGame.addPokemonToStorage(indexToStorage);
     }
 
+    public static int squadSize() {
+        return myGame.squadSize();
+    }
+
+    public static void addPokemonToSquad (int indexPokemon)
+    {
+        if (myGame.getActualSquadSize() == myGame.squadSize())
+        {
+            System.out.println("El equipo esta completo");
+        }
+        else
+        {
+            ArrayList<Pokemon> storagePokemons = myGame.storageToArray();
+            Pokemon add = storagePokemons.get(indexPokemon);
+            myGame.addPokemonUser(add);
+        }
+    }
 }

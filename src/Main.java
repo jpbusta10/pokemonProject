@@ -106,13 +106,7 @@ public class Main {
                     menuPokemon();
                     break;
                 case 4:
-                    if (FrontController.storageSize() == 0)
-                    {
-                        System.out.println("No hay ningun pokemon en el almacenamiento");
-                    }
-                    else {
-                        System.out.println(FrontController.storageView());
-                    }
+                    menuAlmacenamiento();
                     break;
                 case 5:
                    FrontController.saveGame();
@@ -237,7 +231,7 @@ public class Main {
             System.out.println(FrontController.getSquad());
             System.out.println("9. salir");
             option = keyboard.nextInt();
-            if(option >= 1 && option <= FrontController.getSquadSize())
+            if(option >= 1 && option <= FrontController.getActualSquadSize())
             {
                 menuAcciones(option - 1);
             }
@@ -277,7 +271,7 @@ public class Main {
                     option = 9;
                     break;
                 case 4:
-                    if (FrontController.getSquadSize() == 1)
+                    if (FrontController.getActualSquadSize() == 1)
                     {
                         System.out.println("No puedes almacenar el unico pokemon del equipo");
                     }
@@ -331,11 +325,11 @@ public class Main {
             System.out.println("Que bioma deseas explorar?");
             System.out.println("||||||||||||||||||||||||||||||||||||||");
             System.out.println("OPCIONES:");
-            System.out.println("1: VOLCAN");
-            System.out.println("2: PLAYA");
-            System.out.println("3: MONTANA");
-            System.out.println("4: CUEVA");
-            System.out.println("5: BOSQUE");
+            System.out.println("1. VOLCAN");
+            System.out.println("2. PLAYA");
+            System.out.println("3. MONTANA");
+            System.out.println("4. CUEVA");
+            System.out.println("5. BOSQUE");
             opcion = keyboard.nextInt();
             FrontController.logicaCazarPokemones(opcion);
             menuPeleaExploration();
@@ -347,13 +341,13 @@ public class Main {
             System.out.println("Que desea hacer:\n");
             System.out.println("OPCIONES:");
             System.out.println("\n");
-            System.out.println("1: Capturar el pokemon");
-            System.out.println("2: Continuar Explorando");
-            System.out.println("3: Salir");
+            System.out.println("1. Capturar el pokemon");
+            System.out.println("2. Continuar Explorando");
+            System.out.println("3. Salir");
             opcion = keyboard.nextInt();
             switch (opcion){
                 case 1:
-                    System.out.println(FrontController.catchpokemon());
+                    System.out.println(FrontController.catchPokemon());
                     continuar=false;
                     break;
                 case 2:
@@ -408,7 +402,7 @@ public class Main {
         keyboard = new Scanner(System.in);
         System.out.println("presione cualquier tecla para continuar");
         keyboard.nextLine();
-        if (FrontController.getSquadSize() == 1)
+        if (FrontController.getActualSquadSize() == 1)
         {
             System.out.println("Solo tienes un pokemon en el equipo");
         }
@@ -420,7 +414,7 @@ public class Main {
                 System.out.println(FrontController.getSquad());
                 System.out.println("9. Salir");
                 swap = keyboard.nextInt();
-            } while (((swap < 1 || swap > FrontController.getSquadSize()) || swap == indexOfPokemon + 1) && swap != 9);
+            } while (((swap < 1 || swap > FrontController.getActualSquadSize()) || swap == indexOfPokemon + 1) && swap != 9);
             if (swap != 9)
             {
                 FrontController.swapPokemon(swap - 1, indexOfPokemon);
@@ -463,6 +457,57 @@ public class Main {
             else
             {
                 System.out.println("Saliendo");
+            }
+        }
+    }
+
+    static void menuAlmacenamiento ()
+    {
+        int option = 0;
+        if (FrontController.storageSize() == 0)
+        {
+            System.out.println("No hay ningun pokemon en el almacenamiento");
+        }
+        else {
+            while(option != 9) {
+                System.out.println("Puede elegir un pokemon si desea hacer un cambio");
+                System.out.println(FrontController.storageView());
+                System.out.println("9. salir");
+                option = keyboard.nextInt();
+                if(option >= 1 && option <= FrontController.storageSize())
+                {
+                    menuAccionesAlmacenamiento(option - 1);
+                }
+                else if (option != 9)
+                {
+                    System.out.println("La opcion ingresada no existe.");
+                }
+            }
+            System.out.println(FrontController.storageView());
+
+        }
+    }
+
+    static void menuAccionesAlmacenamiento (int indexPokemon)
+    {
+        int option = 0;
+        while (option != 9)
+        {
+            System.out.println("1. Ver datos del pokemon");
+            System.out.println("2. Agregar al squad");
+            System.out.println("9. Salir");
+            option = keyboard.nextInt();
+            switch (option)
+            {
+                case 1:
+                    FrontController.getPokemonDataStorage(indexPokemon);
+                    break;
+                case 2:
+                    FrontController.addPokemonToSquad(indexPokemon);
+                    break;
+                case 9:
+                    System.out.println("Saliendo");
+                    break;
             }
         }
     }
