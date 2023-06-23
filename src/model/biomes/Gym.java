@@ -42,6 +42,10 @@ public class Gym {
         this.passed = passed;
     }
 
+    public Trainer getTrainer(){
+        return trainers.get(0);
+    }
+
     @Override
     public String toString() {
         return "Gym{" +

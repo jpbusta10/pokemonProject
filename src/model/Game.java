@@ -8,6 +8,7 @@ import java.util.Random;
 import Controllers.JsonController;
 import model.biomes.Gym;
 import model.character.Character;
+import model.character.Trainer;
 import model.character.User;
 import scala.util.parsing.combinator.testing.Str;
 
@@ -20,6 +21,7 @@ public class Game {
     private User myUser;
     private int idPokemon; ///actual id pokemon
     private Championship myChampionship;
+    private Trainer actual;
 
     public Game() {
     }
@@ -29,21 +31,55 @@ public class Game {
         myChampionship = new Championship();
     }
 
+    public Biome getForest() {
+        return forest;
+    }
+
+    public Biome getMountain() {
+        return mountain;
+    }
+
+    public Biome getBeach() {
+        return beach;
+    }
+
+    public Biome getCave() {
+        return cave;
+    }
+
+    public Biome getVolcano() {
+        return volcano;
+    }
+
     /**
-     * depending of the biome it returns a ramdom pokemon with respective types
+     * depending on the biome it returns a ramdom pokemon with respective types
      *
      * @param mybiome
      * @return Pokemon
      */
-    public Pokemon Exploration(Biome mybiome) {
+    public Trainer Exploration(Biome mybiome) {
         JsonController controller = new JsonController();
         Random random = new Random();
         int numeroAleatorio = random.nextInt(3) + 1;
         String tipo = mybiome.getTypes(numeroAleatorio);
         Pokemon nuevo = controller.RandomPokemon(tipo);
+        Pokemon.Balanceo(nuevo);
         nuevo.setIdPokedex(idPokemon + 1);
         idPokemon++;
-        return nuevo;
+        Trainer trainer = new Trainer("Wild "+ nuevo.getName());
+        trainer.addPokemon(nuevo);
+        return trainer;
+    }
+
+    public void setActual(Trainer actual) {
+        this.actual = actual;
+    }
+
+    public Trainer getActual() {
+        return actual;
+    }
+    public User getMyUser(){
+        return this.myUser;
     }
 
     public boolean addPokemonUser(Pokemon newPokemon) {
@@ -58,8 +94,10 @@ public class Game {
     public ArrayList getNotFinishedGyms() {
         ArrayList<Gym> gyms = myChampionship.getGyms();
         ArrayList<Gym> notPassed = new ArrayList<>();
-        for (int i = 0; i < gyms.size() && !gyms.get(i).isPassed(); i++) {
-            notPassed.add(gyms.get(i));
+        for(Gym data: gyms){
+            if(!data.isPassed()){
+                notPassed.add(data);
+            }
         }
         return notPassed;
     }
@@ -72,6 +110,28 @@ public class Game {
             }
         }
         return rta;
+    }
+    public Trainer getCurrentTrainer(){
+        return getToDoGym().getTrainer();
+    }
+    public ArrayList<Pokemon> getMyPokemons(){
+        ArrayList<Pokemon> pokemons = myUser.getSquad();
+        return pokemons;
+    }
+    public Pokemon chooceRandomPokemon(Trainer myTrainer){
+        return myTrainer.getRandomAlivePokemon();
+    }
+    public Pokemon getUserPokemon(int id){
+        return myUser.getPokemon(id);
+    }
+    public Gym getGymByName(String name){
+      return myChampionship.getGymByName(name);
+    }
+    public void resetUser(){
+        for(int i=0; i<myUser.getSquad().size()-1;i++){
+            myUser.getPokemon(i).setAlive(true);
+            myUser.getPokemon(i).setCurrentLife(myUser.getPokemon(i).getMaxLife());
+        }
     }
 
     public String getSquad ()
