@@ -31,6 +31,14 @@ public class Game implements Serializable {
         myChampionship = new Championship();
     }
 
+    public int getIdPokemon() {
+        return idPokemon;
+    }
+
+    public void setIdPokemon(int idPokemon) {
+        this.idPokemon = idPokemon;
+    }
+
     public Biome getForest() {
         return forest;
     }
@@ -64,7 +72,7 @@ public class Game implements Serializable {
         String tipo = mybiome.getTypes(numeroAleatorio);
         Pokemon nuevo = controller.RandomPokemon(tipo);
         Pokemon.Balanceo(nuevo);
-        nuevo.setIdPokedex(idPokemon + 1);
+        nuevo.setId(idPokemon + 1);
         idPokemon++;
         Trainer trainer = new Trainer("Wild "+ nuevo.getName());
         trainer.addPokemon(nuevo);
@@ -144,11 +152,6 @@ public class Game implements Serializable {
         return myUser.squadView();
     }
 
-    public int getSquadSize ()
-    {
-        return myUser.getActualSquadSize();
-    }
-
     public void swapPokemon (int posX, int posY)
     {
         myUser.swapPokemon(posX, posY);
@@ -188,5 +191,8 @@ public class Game implements Serializable {
             System.out.println("El equipo quedo de la siguiente manera");
             myUser.squadView();
         }
+    }
+    public int getSquadSize () {
+        return myUser.getSquadSize();
     }
 }
