@@ -11,7 +11,6 @@ import model.biomes.Gym;
 import model.character.Character;
 import model.character.Trainer;
 import model.character.User;
-import scala.util.parsing.combinator.testing.Str;
 
 public class Game implements Serializable {
     Biome forest = Biome.FOREST;
