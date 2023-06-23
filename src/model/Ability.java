@@ -1,6 +1,8 @@
 package model;
 
-public class Ability {
+import java.io.Serializable;
+
+public class Ability implements Serializable {
     private String name;
     private int damage;
 

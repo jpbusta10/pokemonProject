@@ -13,9 +13,23 @@ import java.util.ArrayList;
 public class FrontController {
     private static Game myGame;
 
-    public static void NewGame(String name) {
+    /**
+     * creates a game from scratch
+     * @param name
+     */
+    public static void NewGame(String name){
         myGame = new Game(name);
         myGame.newChampionship();
+    }
+    public static boolean loadGame(){
+        myGame = FileController.loadGame();
+        if(myGame != null){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 
     /**
@@ -23,23 +37,21 @@ public class FrontController {
      * @param id
      * @return boolean
      */
-    public static boolean addPokemonToUserByid(int id) {
+    public static boolean addPokemonToUserByid(int id){
         boolean rta = false;
         Pokemon newPokemon = JsonController.PokemonByID(id);
         rta = myGame.addPokemonUser(newPokemon);
         return rta;
     }
-
-    public static String getNotfinishedGyms() {
+    public static String getNotfinishedGyms(){
         StringBuilder sb = new StringBuilder();
         ArrayList<Gym> notFinished = myGame.getNotFinishedGyms();
-        for (Gym data : notFinished) {
+        for(Gym data: notFinished){
             sb.append(data);
         }
         return sb.toString();
     }
-
-    public static String getFinishedGymsNames() {
+    public static String getFinishedGymsNames(){
 
         StringBuilder sb = new StringBuilder();
         ArrayList<Gym> notFinished = myGame.getNotFinishedGyms();
@@ -50,12 +62,20 @@ public class FrontController {
         return sb.toString();
 
     }
-    public static String getMyPokemons() {
+    public static String getTodoGymName(){ ///returns null if
+        Gym gym = myGame.getToDoGym();
+        return gym.getName();
+    }
+    public static String getToDoTrainerName(){
+        Trainer myTrainer = myGame.getCurrentTrainer();
+        return myTrainer.getName();
+    }
+    public static String getMyPokemons(){
         StringBuilder sb = new StringBuilder();
         ArrayList<Pokemon> pokemons = myGame.getMyPokemons();
         int id = 0;
-        for (Pokemon data : pokemons) {
-            sb.append(id + ": " + data.getName() + "\n");
+        for(Pokemon data: pokemons){
+            sb.append(id + ": "+ data.getName()+"\n");
             id++;
         }
         return sb.toString();
@@ -166,15 +186,6 @@ public class FrontController {
      * @param= int opcion;
      * @return
      */
-    public static String getTodoGymName() { ///returns null if
-        Gym gym = myGame.getToDoGym();
-        return gym.getName();
-    }
-    public static String getToDoTrainerName(){
-        Trainer myTrainer = myGame.getCurrentTrainer();
-        return myTrainer.getName();
-    }
-
     public static String chooceRandomAlivePokemom(){
         Pokemon trainerPok = myGame.getCurrentTrainer().getRandomAlivePokemon();
         if(trainerPok != null){
@@ -225,7 +236,7 @@ public class FrontController {
      * @return boolean
      */
     public static boolean checkIfAliveTrainer(String pokemonName){
-        return myGame.getToDoGym().getTrainer().getPokemonbyName(pokemonName).isAlive();
+       return myGame.getToDoGym().getTrainer().getPokemonbyName(pokemonName).isAlive();
     }
     public static String getPokemonAbilities(int idPokemon){
         StringBuilder sb = new StringBuilder();
@@ -259,6 +270,15 @@ public class FrontController {
         }
         return response;
     }
+    public static String getSquad()
+    {
+        return myGame.getSquad();
+    }
+
+    public static String getPokemonData(int indexOfPokemon)
+    {
+        return myGame.getPokemonData(indexOfPokemon);
+    }
 
     /**
      * checks if the trainer has alive pokemons
@@ -268,6 +288,29 @@ public class FrontController {
         Trainer myTrainer = myGame.getCurrentTrainer();
         return  myTrainer.checkIfAlivePokemons();
     }
+    public static int getSquadSize ()
+    {
+        return myGame.getSquadSize();
+    }
+
+    public static void swapPokemon (int posX, int posY)
+    {
+        myGame.swapPokemon(posX, posY);
+    }
+
+    public static String storageView ()
+    {
+        return myGame.storageView();
+    }
+
+    public static int storageSize ()
+    {
+        return myGame.storageSize();
+    }
+
+
+
+
     /**
      * checks if it has alive pokemons
      * @return boolean
@@ -285,10 +328,6 @@ public class FrontController {
     public static void resetUser(){
         myGame.resetUser();
     }
-    public static int getSquadSize ()
-    {
-        return myGame.getSquadSize();
-    }
     public static String mostrarVidaPokemonUser(int opcion){
         return "vida restante: "+ myGame.getMyUser().getPokemonFromSquad(opcion).getCurrentLife();
     }
@@ -302,12 +341,11 @@ public class FrontController {
     }
     public static String levear(int opcion){
         String mensaje;
-            if(myGame.getMyUser().getPokemonFromSquad(opcion).getLevel()+1==20){
-             mensaje="Tu pokemon ha Evolucionado";
-             }
-            Pokemon.levelup(myGame.getUserPokemon(opcion));
+        if(myGame.getMyUser().getPokemonFromSquad(opcion).getLevel()+1==20){
+            mensaje="Tu pokemon ha Evolucionado";
+        }
+        Pokemon.levelup(myGame.getUserPokemon(opcion));
         mensaje= "Tu pokemon subio de nivel\n" + "El nuevo nivel es: "+ myGame.getMyUser().getPokemonFromSquad(opcion).getLevel();
         return mensaje;
     }
-
 }
