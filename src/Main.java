@@ -346,16 +346,25 @@ public class Main {
                 for (int i = 0; i < 4; i++) {
                     System.out.println("\n");
                 }
-                System.out.println("Que desea hacer:\n");
-                System.out.println("OPCIONES:");
-                System.out.println("\n");
-                System.out.println("1: Capturar el pokemon");
-                System.out.println("2: Continuar Explorando");
-                System.out.println("3: Salir");
-                opcion = keyboard.nextInt();
+                boolean antribreak=false;
+                while (antribreak==false) {
+                    System.out.println("Que desea hacer:\n");
+                    System.out.println("OPCIONES:");
+                    System.out.println("\n");
+                    System.out.println("1: Capturar el pokemon");
+                    System.out.println("2: Continuar Explorando");
+                    System.out.println("3: Salir");
+                    opcion = keyboard.nextInt();
+                    if(opcion<1||opcion>3){
+                        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                        System.out.println("El numero ingresado es invalido");
+                    }else{
+                        antribreak=true;
+                    }
+                }
                 switch (opcion){
                     case 1:
-                        System.out.println(FrontController.catchpokemon());
+                        System.out.println(FrontController.catchPokemon());
                         continuar=false;
                         break;
                     case 2:
@@ -425,6 +434,8 @@ public class Main {
                             if(habilidad>1||habilidad<0){
                                 System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                                 System.out.println("El numero ingresado es invalido");
+                            }else{
+                                auxiliar=true;
                             }
                         }
                         System.out.println("utilizaste: " + FrontController.safePokemonAbiliti(opcion, habilidad));

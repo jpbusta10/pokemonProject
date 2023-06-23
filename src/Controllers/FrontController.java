@@ -40,6 +40,8 @@ public class FrontController {
     public static boolean addPokemonToUserByid(int id){
         boolean rta = false;
         Pokemon newPokemon = JsonController.PokemonByID(id);
+        newPokemon.setId(myGame.getIdPokemon()+1);
+        myGame.setIdPokemon(myGame.getIdPokemon()+1);
         rta = myGame.addPokemonUser(newPokemon);
         return rta;
     }
@@ -176,9 +178,16 @@ public class FrontController {
         }
     }
 
-    public static String catchpokemon(){
-        myGame.getMyUser().addPokemonToStorage(myGame.getActual().getPokemonFromSquad(0));
-        return "El pokemon ha sido capturado con exito";
+    public static String catchPokemon(){
+        String mensaje="";
+        if(myGame.getMyUser().getActualSquadSize()!=myGame.getSquadSize()){
+            myGame.getMyUser().addPokemon(myGame.getActual().getPokemonFromSquad(0));
+            mensaje="El pokemon "+myGame.getActual().getPokemonFromSquad(0).getName()+" ha sido capturado con exito";
+        }else{
+            myGame.getMyUser().addPokemonToStorage(myGame.getActual().getPokemonFromSquad(0));
+            mensaje="El pokemon "+myGame.getActual().getPokemonFromSquad(0).getName()+" ha sido capturado con exito";
+        }
+        return mensaje;
     }
 
     /**
@@ -307,9 +316,10 @@ public class FrontController {
     {
         return myGame.storageSize();
     }
-
-
-
+    public static void addPokemonToStorage (int indexToStorage)
+    {
+        myGame.addPokemonToStorage(indexToStorage);
+    }
 
     /**
      * checks if it has alive pokemons
@@ -335,6 +345,10 @@ public class FrontController {
         return "vida restante: "+myGame.getActual().getPokemonFromSquad(0).getCurrentLife();
 
     }
+    public static void switchPokemon (int indexFromStorage, int indexFromSquad)
+    {
+        myGame.switchPokemon(indexFromStorage, indexFromSquad);
+    }
 
     public static String mostrarNivelPokemonRival(){
         return "Nivel: "+ myGame.getActual().getPokemonFromSquad(0).getLevel();
@@ -347,5 +361,8 @@ public class FrontController {
         Pokemon.levelup(myGame.getUserPokemon(opcion));
         mensaje= "Tu pokemon subio de nivel\n" + "El nuevo nivel es: "+ myGame.getMyUser().getPokemonFromSquad(opcion).getLevel();
         return mensaje;
+    }
+    public static void saveGame(){
+        FileController.saveGame(myGame);
     }
 }

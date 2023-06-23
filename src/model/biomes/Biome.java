@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public enum Biome implements Serializable{
-    FOREST("Grass", "Electic", "Bug"), MOUNTAIN("Ground","Flying","Electric"), BEACH("Water","Electric", "Bug"), VOLCANO("fire","Ground","Electric"), CAVE("Poison","Ground", "Bug");
+    FOREST("Grass", "Electic", "Bug"), MOUNTAIN("Ground","Flying","Electric"), BEACH("Water","Electric", "Bug"), VOLCANO("Fire","Ground","Electric"), CAVE("Poison","Ground", "Bug");
 
     private ArrayList<String> pokemonTypes;
 
@@ -15,7 +15,6 @@ public enum Biome implements Serializable{
         this.pokemonTypes.add(type3);
     }
     public String getTypes(int id){
-
         return pokemonTypes.get(id);
     }
 
