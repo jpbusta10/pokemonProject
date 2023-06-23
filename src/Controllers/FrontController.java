@@ -40,6 +40,7 @@ public class FrontController {
     public static boolean addPokemonToUserByid(int id){
         boolean rta = false;
         Pokemon newPokemon = JsonController.PokemonByID(id);
+        Pokemon.Balanceo(newPokemon);
         newPokemon.setId(myGame.getIdPokemon()+1);
         myGame.setIdPokemon(myGame.getIdPokemon()+1);
         rta = myGame.addPokemonUser(newPokemon);
@@ -290,6 +291,15 @@ public class FrontController {
         Trainer myTrainer = myGame.getCurrentTrainer();
         return  myTrainer.checkIfAlivePokemons();
     }
+    public static int getActualSquadSize ()
+    {
+        return myGame.getMyUser().getActualSquadSize();
+    }
+
+    public static String getUserName(){
+        return myGame.getMyUser().getName();
+    }
+
     public static int getSquadSize ()
     {
         return myGame.getSquadSize();
@@ -329,7 +339,10 @@ public class FrontController {
         myGame.getToDoGym().setPassed(true);
     }
     public static void resetUser(){
-        myGame.resetUser();
+        for(int i=0; i<myGame.getMyUser().getActualSquadSize();i++){
+            myGame.getMyUser().getPokemonFromSquad(i).setAlive(true);
+            myGame.getMyUser().getPokemonFromSquad(i).setCurrentLife(myGame.getMyUser().getPokemonFromSquad(i).getMaxLife());
+        }
     }
     public static String mostrarVidaPokemonUser(int opcion){
         return "vida restante: "+ myGame.getMyUser().getPokemonFromSquad(opcion).getCurrentLife();

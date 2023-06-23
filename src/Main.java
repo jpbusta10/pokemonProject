@@ -57,7 +57,7 @@ public class Main {
         System.out.println("ingrese el nombre de su personaje");
         name = keyboard.nextLine();
         FrontController.NewGame(name);
-        System.out.println("felicitaciones ah iniciado su aventura \nel profesor Samuel Oak le dara a elegir uno de estos Pokemon");
+        System.out.println("felicitaciones ha iniciado su aventura \nel profesor Samuel Oak le dara a elegir uno de estos Pokemon\n");
         System.out.println("1. Pikachu");
         System.out.println("2. Charmander");
         System.out.println("3. bulbasaur");
@@ -86,7 +86,7 @@ public class Main {
         keyboard.nextLine();
         boolean seguir = true;
         while (seguir == true) {
-            System.out.println("que desea hacer ahora");
+            System.out.println("que desea hacer ahora "+FrontController.getUserName());
             System.out.println("1. cazar pokemon");
             System.out.println("2. campeonato");
             System.out.println("3. pokemon");
@@ -237,7 +237,7 @@ public class Main {
             System.out.println(FrontController.getSquad());
             System.out.println("9. salir");
             option = keyboard.nextInt();
-            if(option >= 1 && option <= FrontController.getSquadSize())
+            if(option >= 1 && option <= FrontController.getActualSquadSize())
             {
                 menuAcciones(option - 1);
             }
@@ -404,15 +404,18 @@ public class Main {
             case 2:
                 return 2;
             case 3:
-                boolean index=false;
                 System.out.println("|||||||||||||||||||COMIENZA EL COMBATE|||||||||||||||||||");
                 System.out.println("Empiezas tu\n");
                 while(FrontController.checkIfAbailablePokemonsUser()==true&&FrontController.chequeadorDeVidaRival()==true) {
+                    boolean index=false;
                     while(index==false){
                         System.out.println("Que Pokemon deseas usar?\n");
                         System.out.println(FrontController.getMyPokemons());
                         System.out.println("PRECIONA EL NUMERO AL LADO DEL POKEMON PARA ELEGIRLO");
                         opcion = keyboard.nextInt();
+                        if(FrontController.getActualSquadSize()==1&&opcion==1){
+                            opcion=10;
+                        }
                         if(opcion<0||FrontController.getSquadSize()<opcion){
                             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                             System.out.println("El numero ingresado es invalido");
@@ -420,7 +423,6 @@ public class Main {
                             index=true;
                         }
                     }
-                    FrontController.balancear(opcion);
                     for (int i = 0; i < 4; i++) {
                         System.out.println("\n");
                     }
@@ -457,6 +459,7 @@ public class Main {
                 }else {
                     System.out.println("|||||||||||||||||||  PERDISTE :( |||||||||||||||||||");
                     respuesta=0;
+                    FrontController.resetUser();
                 }
         }
         return respuesta;
