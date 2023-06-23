@@ -70,7 +70,6 @@ public class Game implements Serializable {
         Random random = new Random();
         int numeroAleatorio = random.nextInt(3);
         String tipo = mybiome.getTypes(numeroAleatorio);
-        System.out.println("tipo"+tipo);
         Pokemon nuevo = controller.RandomPokemon(tipo);
         Pokemon.Balanceo(nuevo);
         nuevo.setId(idPokemon + 1);
@@ -140,12 +139,6 @@ public class Game implements Serializable {
     /**
      * resets user pokemons to alive and set life back to max
      */
-    public void resetUser(){
-        for(int i=0; i<myUser.getSquad().size()-1;i++){
-            myUser.getPokemon(i).setAlive(true);
-            myUser.getPokemon(i).setCurrentLife(myUser.getPokemon(i).getMaxLife());
-        }
-    }
 
     public String getSquad ()
     {
