@@ -21,6 +21,9 @@ public class Character {
         return name;
     }
 
+    public int getActualSquadSize() {
+        return squad.size();
+    }
     public boolean addPokemon(Pokemon newPokemon) {
 
         boolean rta = squad.add(newPokemon);

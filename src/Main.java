@@ -231,6 +231,7 @@ public class Main {
 
     static void menuCazarPokemones(){
         keyboard = new Scanner(System.in);
+        int aux;
         boolean continuar=true;
         int opcion;
         System.out.println("presione cualquier tecla para continuar");
@@ -250,74 +251,111 @@ public class Main {
             System.out.println("5: BOSQUE");
             opcion = keyboard.nextInt();
             FrontController.logicaCazarPokemones(opcion);
-            menuPeleaExploration();
-            keyboard.nextLine();
-            keyboard.nextLine();
-            for (int i = 0; i < 4; i++) {
+            aux=menuPeleaExploration();
+            if(aux==1){
+                keyboard.nextLine();
+                keyboard.nextLine();
+                for (int i = 0; i < 4; i++) {
+                    System.out.println("\n");
+                }
+                System.out.println("Que desea hacer:\n");
+                System.out.println("OPCIONES:");
                 System.out.println("\n");
-            }
-            System.out.println("Que desea hacer:\n");
-            System.out.println("OPCIONES:");
-            System.out.println("\n");
-            System.out.println("1: Capturar el pokemon");
-            System.out.println("2: Continuar Explorando");
-            System.out.println("3: Salir");
-            opcion = keyboard.nextInt();
-            switch (opcion){
-                case 1:
-                    System.out.println(FrontController.catchpokemon());
-                    continuar=false;
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    continuar=false;
-                    break;
+                System.out.println("1: Capturar el pokemon");
+                System.out.println("2: Continuar Explorando");
+                System.out.println("3: Salir");
+                opcion = keyboard.nextInt();
+                switch (opcion){
+                    case 1:
+                        System.out.println(FrontController.catchpokemon());
+                        continuar=false;
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        continuar=false;
+                        break;
+                }
+            } else if (aux==4) {
+                continuar=false;
             }
         }
     }
 
 
-    static void menuPeleaExploration() {
+    static int menuPeleaExploration() {
         keyboard = new Scanner(System.in);
-        int opcion, habilidad;
+        int opcion, habilidad=0;
         System.out.println("presione cualquier tecla para continuar");
         keyboard.nextLine();
         for (int i = 0; i < 10; i++) {
             System.out.println("\n");
         }
-        System.out.println("|||||||||||||||||||COMIENZA EL COMBATE|||||||||||||||||||");
-        System.out.println("Has encontrado un: "+FrontController.getPokemonSalvaje());
-        System.out.println("Empiezas tu\n");
-        while(FrontController.checkIfAbailablePokemonsUser()==true&&FrontController.chequeadorDeVidaRival()==true) {
-            System.out.println("Que Pokemon deseas usar?\n");
-            System.out.println(FrontController.getMyPokemons());
-            System.out.println("PRECIONA 0/1/2 PARA ELEGIR EL POKEMON RESPECTIVAMENTE");
-            opcion = keyboard.nextInt();
-            FrontController.balancear(opcion);
-            for (int i = 0; i < 4; i++) {
-                System.out.println("\n");
-            }
-            while (FrontController.chequeadorDeVidaRival() == true && FrontController.chequeadorDeVidaPropia(opcion) == true) {
-                System.out.println(FrontController.safeUserPokemonReturn(opcion));
-                System.out.println(FrontController.mostrarVidaPokemonUser(opcion));
-                System.out.println("Que habilidad deseas utilizar: \n");
-                System.out.println(FrontController.getPokemonAbilities(opcion));
-                System.out.println("PRECIONA 0/1 PARA ELEGIR LA HABILIDAD RESPECTIVAMENTE");
-                habilidad = keyboard.nextInt();
-                System.out.println("utilizaste: " + FrontController.safePokemonAbiliti(opcion, habilidad));
-                System.out.println(FrontController.logicaPeleaExploration(opcion, habilidad));
-                if (FrontController.chequeadorDeVidaRival() == true && FrontController.chequeadorDeVidaPropia(opcion) == true) {
-                    System.out.println("Es el turno del rival\n");
-                    System.out.println(FrontController.getPokemonSalvaje()+"Vida restante: "+FrontController.mostrarVidaPokemonRival() + " Utilizo: " + FrontController.safePokemonAbilitiRival(0, 0));
-                    System.out.println(FrontController.logicaPeleaExplorationInversa(opcion));
+        System.out.println("Has encontrado un: "+FrontController.getPokemonSalvaje()+" "+FrontController.mostrarNivelPokemonRival());
+        System.out.println("Que desea hacer:\n");
+        System.out.println("OPCIONES:");
+        System.out.println("\n");
+        System.out.println("1: Huir");
+        System.out.println("2: Explorar otra vez");
+        System.out.println("3: Pelear");
+        opcion=keyboard.nextInt();
+        switch (opcion){
+            case 1:
+                return 4;
+            case 2:
+                return 2;
+            case 3:
+                boolean index=false;
+                System.out.println("|||||||||||||||||||COMIENZA EL COMBATE|||||||||||||||||||");
+                System.out.println("Empiezas tu\n");
+                while(FrontController.checkIfAbailablePokemonsUser()==true&&FrontController.chequeadorDeVidaRival()==true) {
+                    while(index==false){
+                        System.out.println("Que Pokemon deseas usar?\n");
+                        System.out.println(FrontController.getMyPokemons());
+                        System.out.println("PRECIONA EL NUMERO AL LADO DEL POKEMON PARA ELEGIRLO");
+                        opcion = keyboard.nextInt();
+                        if(opcion<0||FrontController.getSquadSize()<opcion){
+                            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                            System.out.println("El numero ingresado es invalido");
+                        }else{
+                            index=true;
+                        }
+                    }
+                    FrontController.balancear(opcion);
+                    for (int i = 0; i < 4; i++) {
+                        System.out.println("\n");
+                    }
+                    while (FrontController.chequeadorDeVidaRival() == true && FrontController.chequeadorDeVidaPropia(opcion) == true) {
+                        System.out.println(FrontController.safeUserPokemonNameReturn(opcion));
+                        System.out.println(FrontController.mostrarVidaPokemonUser(opcion));
+                        boolean auxiliar=false;
+                        while(auxiliar==false){
+                            System.out.println("Que habilidad deseas utilizar: \n");
+                            System.out.println(FrontController.getPokemonAbilities(opcion));
+                            System.out.println("PRECIONA EL NUMERO AL LADO DE LA HABILIDAD PARA ELEGIRLA");
+                            habilidad = keyboard.nextInt();
+                            if(habilidad>1||habilidad<0){
+                                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                                System.out.println("El numero ingresado es invalido");
+                            }
+                        }
+                        System.out.println("utilizaste: " + FrontController.safePokemonAbiliti(opcion, habilidad));
+                        System.out.println(FrontController.logicaPeleaExploration(opcion, habilidad));
+                        if (FrontController.chequeadorDeVidaRival() == true && FrontController.chequeadorDeVidaPropia(opcion) == true) {
+                            System.out.println("Es el turno del rival\n");
+                            System.out.println(FrontController.getPokemonSalvaje()+FrontController.mostrarVidaPokemonRival() + " Utilizo: " + FrontController.safePokemonAbilitiRival(0, 0));
+                            System.out.println(FrontController.logicaPeleaExplorationInversa(opcion));
+                        }
+                    }
                 }
-            }
+                if(FrontController.checkIfAbailablePokemonsUser()==true) {
+                    System.out.println("|||||||||||||||||||  GANASTE!  |||||||||||||||||||");
+                    System.out.println(FrontController.levear(opcion));
+                    FrontController.resetUser();
+                }else {
+                    System.out.println("|||||||||||||||||||  PERDISTE :( |||||||||||||||||||");
+                }
         }
-        if(FrontController.checkIfAbailablePokemonsUser()==true) {
-            System.out.println("|||||||||||||||||||  GANASTE!  |||||||||||||||||||");
-        }else {
-            System.out.println("|||||||||||||||||||  PERDISTE :( |||||||||||||||||||");
-        }
+        return 1;
     }
 }

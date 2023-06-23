@@ -61,7 +61,7 @@ public class FrontController {
         return sb.toString();
     }
 
-    public static String safeUserPokemonReturn(int opcion) {
+    public static String safeUserPokemonNameReturn(int opcion) {
         return myGame.getMyUser().getPokemonFromSquad(opcion).getName();
     }
 
@@ -151,13 +151,14 @@ public class FrontController {
         if(Pokemon.peleaPokemon(myGame.getActual().getPokemonFromSquad(0).getHabilidad(0).getDamage(),myGame.getMyUser().getPokemonFromSquad(opcion))>0) {
             return "vida restante de " + myGame.getMyUser().getPokemonFromSquad(0).getName()+": "+myGame.getMyUser().getPokemonFromSquad(0).getCurrentLife();
         }else {
+            myGame.getMyUser().getPokemonFromSquad(opcion).setAlive(false);
             return "El pokemon "+myGame.getMyUser().getPokemonFromSquad(opcion).getName()+" no sobrevivio";
         }
     }
 
     public static String catchpokemon(){
         myGame.getMyUser().addPokemonToStorage(myGame.getActual().getPokemonFromSquad(0));
-        return "El poquemon ha sido capturado con exito";
+        return "El pokemon ha sido capturado con exito";
     }
 
     /**
@@ -267,11 +268,6 @@ public class FrontController {
         Trainer myTrainer = myGame.getCurrentTrainer();
         return  myTrainer.checkIfAlivePokemons();
     }
-
-
-
-
-
     /**
      * checks if it has alive pokemons
      * @return boolean
@@ -289,13 +285,29 @@ public class FrontController {
     public static void resetUser(){
         myGame.resetUser();
     }
-
+    public static int getSquadSize ()
+    {
+        return myGame.getSquadSize();
+    }
     public static String mostrarVidaPokemonUser(int opcion){
         return "vida restante: "+ myGame.getMyUser().getPokemonFromSquad(opcion).getCurrentLife();
     }
     public static String mostrarVidaPokemonRival(){
         return "vida restante: "+myGame.getActual().getPokemonFromSquad(0).getCurrentLife();
 
+    }
+
+    public static String mostrarNivelPokemonRival(){
+        return "Nivel: "+ myGame.getActual().getPokemonFromSquad(0).getLevel();
+    }
+    public static String levear(int opcion){
+        String mensaje;
+            if(myGame.getMyUser().getPokemonFromSquad(opcion).getLevel()+1==20){
+             mensaje="Tu pokemon ha Evolucionado";
+             }
+            Pokemon.levelup(myGame.getUserPokemon(opcion));
+        mensaje= "Tu pokemon subio de nivel\n" + "El nuevo nivel es: "+ myGame.getMyUser().getPokemonFromSquad(opcion).getLevel();
+        return mensaje;
     }
 
 }

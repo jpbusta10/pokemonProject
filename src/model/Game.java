@@ -132,4 +132,7 @@ public class Game {
             myUser.getPokemon(i).setCurrentLife(myUser.getPokemon(i).getMaxLife());
         }
     }
+    public int getSquadSize () {
+        return myUser.getActualSquadSize();
+    }
 }
